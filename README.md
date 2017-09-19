@@ -1,5 +1,5 @@
 # bot_twitter
-Bot para publicar, dar like y retwittear según patrones coincidentes
+Bot para publicar, marcar twitts favoritos y retwittear según patrones coincidentes
 
 El principal objetivo de este bot es analizar antes de actuar y no actuar siempre de manera previsible.
 
