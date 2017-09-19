@@ -8,6 +8,10 @@ Es posible que requiera una porción insignificante de tiempo por encima de lo n
 Mediante una función se programarán publicaciones cada cierto tiempo, ajustando este valor entre las variables mínimas y máximas. La idea es que pase un tiempo distinto entre cada publicación por ejemplo mínimo 10minutos y máximo 40minutos → Esto será calculado mediante una función que devuelva el tiempo aleatoriamente.
 
 ## Datos del proyecto
+BOT solo probado en GNU/Linux Debian 9 y Fedora 26
+
+Para las publicaciones es necesario que exista un archivo en formato y con la extensión "ods" en el mismo directorio o pedirá elegir donde obtenerlo mediante una ruta absoluta en el sistema. Dicho archivo se busca por defecto en el mismo directorio del bot con el siguiente nombre "publicar.ods"
+
 
 ## Estructura
 - main.py → Contiene el programa principal, todas las llamadas y funcionamiento.
@@ -17,6 +21,13 @@ Mediante una función se programarán publicaciones cada cierto tiempo, ajustand
 ## Dependencias
 Aquí se listan las dependencias necesarias para el correcto funcionamiento del bot
 - python 2.7
+- Módulos/Librerías python
+	- - pyexcel-ods
+	
+## Instalar dependencias en Debian 9
+sudo apt install git
+sudo apt install python python-pip
+sudo pip install pyexcel-ods
 
 ## Colaboradores
 ### Raúl Caro Pastorino (fryntiz)
