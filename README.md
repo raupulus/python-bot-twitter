@@ -12,3 +12,7 @@ Mediante una función se programarán publicaciones cada cierto tiempo, ajustand
 - main.py → Contiene el programa principal, todas las llamadas y funcionamiento.
 - VAR.lst → Lista de variables para el funcionamiento del programa, incluyendo token de API twitter
 - ODS_to_CSV → Transforma oja de cálculo en formato ODS de LibreOffice a CSV para trabajar más sencillo
+
+## Dependencias
+Aquí se listan las dependencias necesarias para el correcto funcionamiento del bot
+- python 2.7
