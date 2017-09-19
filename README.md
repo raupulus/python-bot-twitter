@@ -7,6 +7,7 @@ Es posible que requiera una porción insignificante de tiempo por encima de lo n
 
 Mediante una función se programarán publicaciones cada cierto tiempo, ajustando este valor entre las variables mínimas y máximas. La idea es que pase un tiempo distinto entre cada publicación por ejemplo mínimo 10minutos y máximo 40minutos → Esto será calculado mediante una función que devuelva el tiempo aleatoriamente.
 
+## Datos del proyecto
 
 ## Estructura
 - main.py → Contiene el programa principal, todas las llamadas y funcionamiento.
@@ -16,3 +17,9 @@ Mediante una función se programarán publicaciones cada cierto tiempo, ajustand
 ## Dependencias
 Aquí se listan las dependencias necesarias para el correcto funcionamiento del bot
 - python 2.7
+
+## Colaboradores
+### Raúl Caro Pastorino (fryntiz)
+- GitHub → https://github.com/fryntiz
+- E-mail → tecnico@fryntiz.es
+- WEB → www.fryntiz.es
