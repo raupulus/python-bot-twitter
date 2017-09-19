@@ -30,6 +30,8 @@ sleep = time.sleep #variable para usar con más comodidad el control de tiempo
 def buscarODS()
 	print('Buscando archivo ODS')
 
-# Probar abrir el archivo y si da error volver a la función anterior
+# Probar abrir CSV y si da error volver a la función anterior
+def leerCSV()
+	#if error --> print('No se puede leer el CSV generado') and buscarODS()
 
 # Conectar a la API
