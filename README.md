@@ -1,6 +1,12 @@
 # bot_twitter
 Bot para publicar, dar like y retwittear según patrones coincidentes
 
+El principar objetivo de este bot es analizar antes de actuar y no actuar siempre de manera previsible.
+
+Es posible que requiera una porción insignificante de tiempo por encima de lo normal antes de actuar ya que conecta mediante la API de twitter para comprobar twitt y retwitt de objetivos seleccionados para según el patrón establecido retwittear también o dar me gusta.
+
+Mediante una función se programarán publicaciones cada cierto tiempo, ajustando este valor entre las variables mínimas y máximas. La idea es que pase un tiempo distinto entre cada publicación por ejemplo mínimo 10minutos y máximo 40minutos → Esto será calculado mediante una función que devuelva el tiempo aleatoriamente.
+
 
 ## Estructura
 - main.py → Contiene el programa principal, todas las llamadas y funcionamiento.
