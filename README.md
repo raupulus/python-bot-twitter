@@ -25,9 +25,8 @@ Aquí se listan las dependencias necesarias para el correcto funcionamiento del 
 	- - pyexcel-ods
 	
 ## Instalar dependencias en Debian 9
-sudo apt install git
-sudo apt install python python-pip
-sudo pip install pyexcel-ods
+sudo apt install git python python-pip
+sudo pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls}
 
 ## Colaboradores
 ### Raúl Caro Pastorino (fryntiz)
