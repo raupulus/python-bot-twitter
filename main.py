@@ -17,7 +17,8 @@ import time #Importamos la libreria time --> time.sleep
 import sys #Importar comandos del sistema, por ejemplo exit
 import os #Importamos la libreria para comandos de la consola/shell/bash/sistema
 import random #Genera números aleatorios --> random.randrange(1,100)
-import ODS_to_CSV
+import ODS_to_CSV #Importa de este directorio el script para convertir a CSV
+import API_Twitter #Importa el script en este directorio para conectar con Twitter
 from VAR import * #importar todas las variables
 
 ##############################
