@@ -12,6 +12,8 @@ BOT solo probado en GNU/Linux Debian 9 y Fedora 26
 
 Para las publicaciones es necesario que exista un archivo en formato y con la extensión "ods" en el mismo directorio o pedirá elegir donde obtenerlo mediante una ruta absoluta en el sistema. Dicho archivo se busca por defecto en el mismo directorio del bot con el siguiente nombre "publicar.ods"
 
+### Conversión a CSV
+Para las publicaciones se utiliza un archivo LibreCalc en formato ODS donde la columna "B" será la que contenga las publicaciones y será la que se exportará al CSV como una publicación por línea.
 
 ## Estructura
 - main.py → Contiene el programa principal, todas las llamadas y funcionamiento.
