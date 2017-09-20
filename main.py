@@ -55,11 +55,20 @@ comprobarCSV()
 def leerCSV():
 	print('Abriendo el archivo Publicar.csv')
 	try:
-		PUBLICACIONES = codecs.open('Publicar.csv', 'r', encoding='utf8')
+		PUBLICACIONES = open('Publicar.csv', 'r')
 	except:
 		print('Error al abrir Publicar.csv')
 		print('Comprueba que existe y tienes permisos de lectura')
 		sys.exit(0)
+	print('Archivo Publicar.csv abierto en modo LECTURA')
+leerCSV()
 
 #Conectar a la API de Twitter
-
+def conectar_Twitter():
+	print('Conectando con la API de Twitter')
+	print('Espera un momento mientras se establece la conexión')
+	#En el siguiente bloque se ha de intentar conectar pero en caso de fallar esperar 10 segundos y reintentar hasta 10 veces
+	try:
+		print('Llamar a la función para conectar')
+	except:
+		print('No se ha podido conectar a la API de Twiiter')
