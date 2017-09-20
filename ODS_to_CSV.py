@@ -9,23 +9,21 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
-##############################
-##    Importar Librerías    ##
-##############################
+import pyexcel as pe
+import codecs #Librería para codificar en UTF-8 (Error al write ñ)
 
-from pyexcel_ods import get_data
+#filas --> start_row=X, row_limit=X
+#Columnas --> start_column=X, column_limit=X
+#Se fija para que solo extraiga la columna "B" así:
+sheet = pe.get_book(file_name="test.ods", start_column=1, column_limit=1)
 
+#Abrir archivo donde escribir
+salida = codecs.open('test.csv', 'w', encoding='utf8')
 
-##############################
-##         Variables        ##
-##############################
-
-data = get_data("publicar.ods")
-
-#Ejemplo en JSON
-#import json
-#print(json.dumps(data))
-#{"Sheet 1": [[1, 2, 3], [4, 5, 6]], "Sheet 2": [["row 1", "row 2", "row 3"]]}
-
-
-
+#Pasar cada línea al archivo csv
+for lines in sheet:
+	#Con la siguiente opción se crea un csv por cada hoja existente:
+	#print(lines).save_as("Hoja.csv")
+	for line in lines:
+		print('Escribiendo: ' + line[0])
+		salida.write(line[0] + '\n')
