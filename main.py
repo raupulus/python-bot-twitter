@@ -29,13 +29,14 @@ sleep = time.sleep #variable para usar con más comodidad el control de tiempo
 def existe_archivo(nombre)
 	os.path.isfile(nombre)
 
-print('Buscando archivo \"Publicar.ods\"')
-if existe_archivo(Publicar.ods)
-	print('Utilizando el Archivo Publicar.ods de este mismo directorio')
+print('Buscando archivo' + ARCHIVO_ENTRADA)
+if existe_archivo(ARCHIVO_ENTRADA)
+	print('Utilizando el Archivo' + ARCHIVO_ENTRADA + 'de este mismo directorio')
 else
 	ARCHIVO_ENTRADA = raw_input('Introduce la ruta completa hasta el archivo')
-	#TODO --> Necesario controlar que existe el archivo: Crear función en bucle hasta comprobar
-toODS(PUB_IN)
+
+
+toODS(ARCHIVO_ENTRADA)
 
 
 # Buscar el archivo publicar.ods y si no existe pedir por pantalla la ruta absoluta y nombre del archivo
