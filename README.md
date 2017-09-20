@@ -23,13 +23,17 @@ Para las publicaciones se utiliza un archivo LibreCalc en formato ODS donde la c
 ## Dependencias
 Aquí se listan las dependencias necesarias para el correcto funcionamiento del bot
 - python 2.7
-- Módulos/Librerías python
+- Módulos/Librerías python externos
 	- pyexcel-ods
+	- twitter
+	- codecs
+	- tweepy
 	
 ## Instalar dependencias en Debian 9
 sudo apt install git python python-pip
 
-pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs
+pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs twitter tweepy
+
 
 ## Colaboradores
 ### Raúl Caro Pastorino (fryntiz)
