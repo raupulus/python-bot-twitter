@@ -29,7 +29,7 @@ Aquí se listan las dependencias necesarias para el correcto funcionamiento del 
 ## Instalar dependencias en Debian 9
 sudo apt install git python python-pip
 
-pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls}
+pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs
 
 ## Colaboradores
 ### Raúl Caro Pastorino (fryntiz)
