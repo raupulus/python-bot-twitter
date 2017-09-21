@@ -18,6 +18,8 @@ def toODS(nombreArchivo):
 	HOJAS = pe.get_book(file_name=nombreArchivo, start_column=1, column_limit=1)
 
 	#Abrir archivo donde escribir
+	if DEBUG:
+		print('Abriendo archivo Publicar.csv codificado en UTF-8')
 	SALIDA = codecs.open('Publicar.csv', 'w', encoding='utf8')
 
 	##TOFIX
@@ -26,6 +28,6 @@ def toODS(nombreArchivo):
 		for line in lines:
 			#Comprobar que la línea no está en blanco (if -- continue)
 			#Comprobar que la línea tiene más de 10 carácteres (elif -- continue)
-			print(len(line))
-			print('Escribiendo: ' + line[0])
+			if DEBUG:
+				print('Escribiendo: ' + line[0])
 			SALIDA.write(line[0] + '\n')
