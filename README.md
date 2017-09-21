@@ -13,17 +13,22 @@ Actualmente está en desarrollo por lo que no se recomienda aún el uso.
 Se continúa trabajando sobre el bot, ya es posible twittear pero se ha de solventar manualmente ciertas cuestiones que serán corregidas en breve.
 
 ## Obejtivos del bot
-[x] Exportar de ODS a CSV
-[ ] Publicar automáticamente
+- [x] Exportar de ODS a CSV
+- [ ] Publicar automáticamente
 
+---
 
 ## Datos del proyecto
 BOT solo probado en GNU/Linux Debian 9 y Fedora 26
 
 Para las publicaciones es necesario que exista un archivo en formato y con la extensión "ods" en el mismo directorio o pedirá elegir donde obtenerlo mediante una ruta absoluta en el sistema. Dicho archivo se busca por defecto en el mismo directorio del bot con el siguiente nombre "publicar.ods"
 
+---
+
 ### Conversión a CSV
 Para las publicaciones se utiliza un archivo LibreCalc en formato ODS donde la columna "B" será la que contenga las publicaciones y será la que se exportará al CSV como una publicación por línea.
+
+---
 
 ## Estructura
 - main.py → Contiene el programa principal, todas las llamadas y funcionamiento.
@@ -42,11 +47,13 @@ Aquí se listan las dependencias necesarias para el correcto funcionamiento del 
 ## Instalar dependencias en Debian 9
 sudo apt install git python python-pip
 
+```python
 pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs twitter tweepy
-
+```
+---
 
 ## Colaboradores
-### Raúl Caro Pastorino (fryntiz)
+### Raúl Caro Pastorino @fryntiz
 - GitHub → https://github.com/fryntiz
 - E-mail → tecnico@fryntiz.es
-- WEB → www.fryntiz.es
+- WEB → http://www.fryntiz.es
