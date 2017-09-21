@@ -29,21 +29,21 @@ from VAR import * #importar todas las variables
 ##############################
 sleep = time.sleep #variable para usar con más comodidad el control de tiempo
 
-
 #Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
 def existe_archivo(nombre):
 	return os.path.isfile(nombre) #Comprueba que existe un archivo --> os.path.isfile(fname) y os.path.islink(fname)
 
-#Comprobar si existe el archivo Publicar.ods o pedir nombre y ruta a otro ODS
-print('[+]Buscando archivo: ' + ARCHIVO_ENTRADA)
-if existe_archivo(ARCHIVO_ENTRADA):
-	print('[+]Utilizando el Archivo ' + ARCHIVO_ENTRADA + ' de este mismo directorio')
-else:
-	print('[~]Archivo ' + ARCHIVO_ENTRADA + ' No encontrado')
-	ARCHIVO_ENTRADA = raw_input('Introduce la ruta completa hasta el archivo: ')
-
-#Convertir a CSV el archivo seleccionado
-ODS_to_CSV.toODS(ARCHIVO_ENTRADA)
+#Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
+def convertir_archivo():
+	global ARCHIVO_ENTRADA
+	print('[+]Buscando archivo: ' + ARCHIVO_ENTRADA)
+	if existe_archivo(ARCHIVO_ENTRADA):
+		print('[+]Utilizando el Archivo ' + ARCHIVO_ENTRADA + ' de este mismo directorio')
+		ODS_to_CSV.toODS(ARCHIVO_ENTRADA)
+	else:
+		print('[~]Archivo ' + ARCHIVO_ENTRADA + ' No encontrado')
+		ARCHIVO_ENTRADA = raw_input('Introduce la ruta completa hasta el archivo: ')
+convertir_archivo()
 
 #Comprobar que existe el archivo Publicar.csv donde están las publicaciones
 def comprobarCSV():
@@ -57,6 +57,7 @@ comprobarCSV()
 
 #Función para contar el total de líneas en el archivo CSV
 def contar_lineas():
+	global TOTAL_LINEAS
 	print('[+]Contando líneas en Publicar.csv')
 	try:
 		ARCHIVO_CSV = open('Publicar.csv', 'r')
@@ -157,3 +158,5 @@ def linea_to_cadena(linea):
 #Preparando para cerrar
 #ARCHIVO_CSV.close()
 
+print('avasf')
+print(TOTAL_LINEAS)

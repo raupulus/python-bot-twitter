@@ -8,6 +8,7 @@
 ## ##                             ## ##
 # ###       www.fryntiz.es        ### #
 #######################################
+DEBUG = False
 
 #Función para crear un archivo CSV a partir del ODS pasado usando solo la columna "B"
 def toODS(nombreArchivo):
