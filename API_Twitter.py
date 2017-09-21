@@ -13,6 +13,7 @@
 ##Función para dar favorito
 ##Función para analizar comentarios de un tweet
 ##Función para retwittear todo lo de un array de personas
+##Función para seguir a quien me siga si cumple un patrón
 
 #Función para conectar con la API de Twitter (Variables en VAR.py)
 def conectar():
@@ -26,15 +27,3 @@ def publicar(publicacion):
 	print("[+] Twitteando la siguiente entrada...")
 	api.update_status(status = publicacion)
 	print("[+] Tweet: ", publicacion)
-
-
-
-
-
-
-
-
-
-
-
-
