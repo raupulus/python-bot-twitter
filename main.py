@@ -105,9 +105,27 @@ def publicar_Twitter(publicacion):
 	#Al publicar sin errores en todos los intentos = LINEA_ACTUAL + 1
 	#Comprobar si LINEA_ACTUAL = TOTAL_LINEAS reiniciar LINEA_ACTUAL = 0
 
-#Función a la que se pasa el número de línea y la convierte en cadena
+#Función que comprueba que la línea actual cumpla requisitos de publicación
+def comprobar_linea(linea_test):
+	if len(linea_test) > 10:
+		return true
+	else:
+		return false
+
+#Función a la que se pasa el número de línea y la convierte en cadena. Si está mal o en blanco toma la siguiente
 def linea_to_cadena(linea):
+	linea_to_cadena = ''
+	linea_incorrecta = True
 	print('[+]La línea' + linea + 'se procesa a cadena')
+
+	#Comprueba variable linea y continua si está bien, sino busca la siguiente
+	if != comprobar_linea(linea):
+		where linea_incorrecta:
+			#Usar la función comprobar_linea y si no cumple (return false) pasar a la siguiente (LINEA_ACTUAL + 1 y comprobar de nuevo):
+			LINEA_ACTUAL = LINEA_ACTUAL + 1
+			if comprobar_linea(linea):
+				linea_incorrecta = False
+				break
 	#Extraer del archivo CSV la cadena correspondiente a la variable "linea"
 	#return cadena
 
