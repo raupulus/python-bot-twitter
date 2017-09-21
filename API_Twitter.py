@@ -55,7 +55,11 @@ for line in f:
 
 
 
+def conectar():
+	print('Conectando con la API')
 
+def publicar(publicacion):
+	print('Preparando para publicar ' + publicacion)
 
 
 
