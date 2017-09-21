@@ -86,14 +86,25 @@ def conectar_Twitter():
 			elif tmp == 10:
 				print('[-]Se han realizado 10 intentos de conexión sin éxito')
 
-	print('Se reintentará más tarde')
+	print('[Se reintentará más tarde')
 	tmp = 0 #Reseteando variable local
-conectar_Twitter()
+#conectar_Twitter() #DESCOMENTAR PARA EJECUTAR
 
 #Leer línea según contador
 #Calcular total de líneas para saber cuando parar o comenzar a repetir Twitts
 #Llevar contador de la línea actual
 #Saltar líneas en blanco o con menos de 10 carácteres
+#Pasar variables necesarias en más funcionesa generales en VAR.py
+TOTAL_LINEAS = ''
+LINEA_ACTUAL = ''
+
+#Publicar la cadena pasada a la función y aumentar el contador de línea
+def publicar_Twitter(publicacion):
+	API_Twitter.publicar(publicacion)
+	#Comprobar que se ha realizado correctamente (return true)
+	#Al publicar sin errores en todos los intentos = LINEA_ACTUAL + 1
+	#Comprobar si LINEA_ACTUAL = TOTAL_LINEAS reiniciar LINEA_ACTUAL = 0
+
 
 #Twittear 1 entrada cada X minutos (2 en total)
 
