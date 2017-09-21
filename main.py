@@ -72,10 +72,19 @@ def conectar_Twitter():
 	print('Conectando con la API de Twitter')
 	print('Espera un momento mientras se establece la conexión')
 	#En el siguiente bloque se ha de intentar conectar pero en caso de fallar esperar 10 segundos y reintentar hasta 10 veces
-	try:
-		print('Llamar a la función para conectar')
-	except:
-		print('No se ha podido conectar a la API de Twiiter')
+	tmp = 0
+	while tmp <= 10:
+		try:
+			print('Llamar a la función para conectar')
+			API_Twitter.conectar()
+		except:
+			print('No se ha podido conectar a la API de Twiiter, reintento ' + tmp)
+			if tmp = 10:
+				print('Se reintentará en 10 segundos')
+	print('Se han realizado 10 intentos de conexión sin éxito')
+	print('Se reintentará más tarde')
+	tmp = 0 #Reseteando variable local
+conectar_Twitter()
 
 
 
