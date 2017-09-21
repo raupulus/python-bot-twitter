@@ -105,6 +105,12 @@ def publicar_Twitter(publicacion):
 	#Al publicar sin errores en todos los intentos = LINEA_ACTUAL + 1
 	#Comprobar si LINEA_ACTUAL = TOTAL_LINEAS reiniciar LINEA_ACTUAL = 0
 
+#Función a la que se pasa el número de línea y la convierte en cadena
+def linea_to_cadena(linea):
+	print('[+]La línea' + linea + 'se procesa a cadena')
+	#Extraer del archivo CSV la cadena correspondiente a la variable "linea"
+	#return cadena
+
 
 #Twittear 1 entrada cada X minutos (2 en total)
 
