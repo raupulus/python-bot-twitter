@@ -20,8 +20,12 @@ def toODS(nombreArchivo):
 	#Abrir archivo donde escribir
 	SALIDA = codecs.open('Publicar.csv', 'w', encoding='utf8')
 
+	##TOFIX
 	#Pasar cada línea al archivo csv
 	for lines in HOJAS:
 		for line in lines:
+			#Comprobar que la línea no está en blanco (if -- continue)
+			#Comprobar que la línea tiene más de 10 carácteres (elif -- continue)
+			print(len(line))
 			print('Escribiendo: ' + line[0])
 			SALIDA.write(line[0] + '\n')
