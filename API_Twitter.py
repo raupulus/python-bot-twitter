@@ -29,38 +29,38 @@ ARCHIVO_ENTRADA = "./entrada.txt"
 
 #Importar modulo de twitter e iniciar conexión con este usando tokens OAUTH:
 #from twitter import Twitter, OAuth, TwitterHTTPError
+#ACCESS_KEY = ''
+#ACCESS_SECRET = ''
+#CONSUMER_KEY = ''
+#CONSUMER_SECRET = ''
 
-ACCESS_KEY = ''
-ACCESS_SECRET = ''
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
 
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-api = tweepy.API(auth)
 
 #Autentificar en python
 #t = Twitter(auth=OAuth(OAUTH_TOKEN, OAUTH_SECRET,
 #            CONSUMER_KEY, CONSUMER_SECRET))
 
-filename = open(ARCHIVO_ENTRADA,'r')
-f = filename.readlines()
-filename.close()
 
-for line in f:
-    print("[+] Twitteando la siguiente entrada...")
-    api.update_status(status = line)
-    print("[+] Tweet: ", line)
-    time.sleep(20)
+#for line in f:
+#    print("[+] Twitteando la siguiente entrada...")
+#    api.update_status(status = line)
+#    print("[+] Tweet: ", line)
+#    time.sleep(20)
 
 
-
+#Función para conectar con la API de Twitter
 def conectar():
 	print('Conectando con la API')
+	autenticar = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+	autenticar.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+	api = tweepy.API(autenticar)
 
+#Función para Publicar en Twitter
 def publicar(publicacion):
-	print('Preparando para publicar ' + publicacion)
-
+	print("[+] Twitteando la siguiente entrada...")
+	api.update_status(status = line)
+	print("[+] Tweet: ", line)
+	time.sleep(5)
 
 
 
