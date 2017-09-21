@@ -55,23 +55,32 @@ def comprobarCSV():
 		sys.exit(0) #Salir del script
 comprobarCSV()
 
+#Función para contar el total de líneas en el archivo CSV
+def contar_lineas():
+	print('[+]Contando líneas en Publicar.csv')
+	try:
+		ARCHIVO_CSV = open('Publicar.csv', 'r')
+		TOTAL_LINEAS = len(ARCHIVO_CSV.readlines())
+		ARCHIVO_CSV.close()
+	except:
+		print('[-]Error al abrir Publicar.csv')
+		print('[-]Comprueba que existe y tienes permisos de lectura')
+		sys.exit(0)
+	print('[+]Se han contado en el Archivo ', TOTAL_LINEAS, ' lineas en total')
+	sleep(5)
+contar_lineas()
+
 #Abrir CSV en solo lectura para poder publicar
 def leerCSV():
 	print('[+]Abriendo el archivo Publicar.csv')
 	try:
-		PUBLICACIONES = open('Publicar.csv', 'r')
+		ARCHIVO_CSV = open('Publicar.csv', 'r')
 	except:
 		print('[-]Error al abrir Publicar.csv')
 		print('[-]Comprueba que existe y tienes permisos de lectura')
 		sys.exit(0)
 	print('[+]Archivo Publicar.csv abierto en modo LECTURA')
 leerCSV()
-
-##TODO
-#Función para contar el total de líneas en el archivo CSV generado y abierto
-def contar_Lineas():
-	print('Contando líneas en ' + ARCHIVO_ENTRADA)
-	#ARCHIVO_ENTRADA
 
 ##TOFIX
 #Conectar a la API de Twitter
@@ -116,9 +125,9 @@ def comprobar_linea(linea_test):
 def siguiente_linea():
 	linea_incorrecta = False
 	#Comprueba variable linea y continua si está bien, sino busca la siguiente
-	if != comprobar_linea(LINEA_ACTUAL):
+	if not comprobar_linea(LINEA_ACTUAL):
 		linea_incorrecta = True
-		where linea_incorrecta:
+		while linea_incorrecta:
 			LINEA_ACTUAL = LINEA_ACTUAL + 1
 			if comprobar_linea(linea):
 				linea_incorrecta = False
@@ -146,5 +155,5 @@ def linea_to_cadena(linea):
 #Estructura para controlar el tiempo total que trabajará el bot (o hasta infinito)
 
 #Preparando para cerrar
-ARCHIVO_ENTRADA.close()
+#ARCHIVO_CSV.close()
 
