@@ -89,10 +89,13 @@ def conectar_Twitter():
 conectar_Twitter()
 
 
+#Twittear 1 entrada cada X minutos (2 en total)
 
+#Agregar 1 favorito cada X minutos (3 en total)
 
+#Retwittear 1 twitt cada X minutos (5 en total)
 
-
+#Estructura para controlar el tiempo total que trabajará el bot (o hasta infinito)
 
 #Preparando para cerrar
 ARCHIVO_ENTRADA.close()
