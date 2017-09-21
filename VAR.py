@@ -19,3 +19,6 @@ ARCHIVO_CSV = ''
 
 TOTAL_LINEAS = ''
 LINEA_ACTUAL = ''
+
+#Poner a TRUE para mostrar más información
+DEBUG = TRUE
