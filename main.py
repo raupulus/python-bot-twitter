@@ -9,6 +9,9 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
+##TODO
+##Comprobar líneas antes de entrar → No puede estar vacía, ir a la siguiente
+
 ##############################
 ##    Importar Librerías    ##
 ##############################
@@ -73,3 +76,13 @@ def conectar_Twitter():
 		print('Llamar a la función para conectar')
 	except:
 		print('No se ha podido conectar a la API de Twiiter')
+
+
+
+
+
+
+
+#Preparando para cerrar
+ARCHIVO_ENTRADA.close()
+
