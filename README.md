@@ -15,16 +15,19 @@ Se continúa trabajando sobre el bot, ya es posible twittear pero se ha de solve
 ## Obejtivos del bot
 - [x] Exportar de ODS a CSV
 - [x] Conectar con API de Twitter
-- [ ] Publicar automáticamente
+- [ ] Convertir número de línea a cadena
+- [ ] Publicar automáticamente todas las líneas del CSV
 - [ ] Marcar favoritos según patrones
 - [ ] Marcar favorito todo según quien comparta
 - [ ] Retwittear según patrones
 - [ ] Retwittear todo según quien comparta
+- [ ] Conectar a BD SQLite local donde se controla las veces que se publica cada una
+- [ ] Publicaciones aleatorias de todo el archivo, solo se repite a partir de 10 días una publicación (comprobar fecha) y la publicación más twitteada no puede distar más de 3 sobre la menos publicada. Así se equilibra que una se publique mucho más que otra creando cierta aletoriedad
 
 ---
 
 ## Datos del proyecto
-BOT solo probado en _GNU/Linux_ *Debian 9* y *Fedora 26*
+BOT solo probado en _GNU/Linux_ **Debian 9** y **Fedora 26**
 
 Para las publicaciones es necesario que exista un archivo en formato y con la extensión "ods" en el mismo directorio o pedirá elegir donde obtenerlo mediante una ruta absoluta en el sistema. Dicho archivo se busca por defecto en el mismo directorio del bot con el siguiente nombre "publicar.ods"
 
