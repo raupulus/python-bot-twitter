@@ -7,6 +7,14 @@ Es posible que requiera una porción insignificante de tiempo por encima de lo n
 
 Mediante una función se programarán publicaciones cada cierto tiempo, ajustando este valor entre las variables mínimas y máximas. La idea es que pase un tiempo distinto entre cada publicación por ejemplo mínimo 10minutos y máximo 40minutos → Esto será calculado mediante una función que devuelva el tiempo aleatoriamente.
 
+## Versión actual
+Actualmente está en desarrollo por lo que no se recomienda aún el uso.
+
+Se continúa trabajando sobre el bot, ya es posible twittear pero se ha de solventar manualmente ciertas cuestiones que serán corregidas en breve.
+
+## Obejtivos del bot
+[] Publicar automáticamente
+
 ## Datos del proyecto
 BOT solo probado en GNU/Linux Debian 9 y Fedora 26
 
