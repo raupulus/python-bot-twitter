@@ -9,44 +9,10 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
-####TO_DO AND TO_FIX####
-#Comprobar salto de línea "\n" para hacer "break" y no publicarlo
-#Establecer formato de publicaciones desde una hoja de cálculo
-
-
-##############################
-##    Importar Librerías    ##
-##############################
-
-import time, os, random, tweepy, sys
-
-##############################
-##         Variables        ##
-##############################
-
-sleep = time.sleep
-ARCHIVO_ENTRADA = "./entrada.txt"
-
-#Importar modulo de twitter e iniciar conexión con este usando tokens OAUTH:
-#from twitter import Twitter, OAuth, TwitterHTTPError
-#ACCESS_KEY = ''
-#ACCESS_SECRET = ''
-#CONSUMER_KEY = ''
-#CONSUMER_SECRET = ''
-
-
-
-#Autentificar en python
-#t = Twitter(auth=OAuth(OAUTH_TOKEN, OAUTH_SECRET,
-#            CONSUMER_KEY, CONSUMER_SECRET))
-
-
-#for line in f:
-#    print("[+] Twitteando la siguiente entrada...")
-#    api.update_status(status = line)
-#    print("[+] Tweet: ", line)
-#    time.sleep(20)
-
+##TODO
+##Función para dar favorito
+##Función para analizar comentarios de un tweet
+##Función para retwittear todo lo de un array de personas
 
 #Función para conectar con la API de Twitter
 def conectar():
