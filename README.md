@@ -13,7 +13,9 @@ Actualmente está en desarrollo por lo que no se recomienda aún el uso.
 Se continúa trabajando sobre el bot, ya es posible twittear pero se ha de solventar manualmente ciertas cuestiones que serán corregidas en breve.
 
 ## Obejtivos del bot
-[] Publicar automáticamente
+[x] Exportar de ODS a CSV
+[ ] Publicar automáticamente
+
 
 ## Datos del proyecto
 BOT solo probado en GNU/Linux Debian 9 y Fedora 26
