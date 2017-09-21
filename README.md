@@ -52,6 +52,7 @@ Aquí se listan las dependencias necesarias para el correcto funcionamiento del 
 	- twitter
 	- codecs
 	- tweepy
+	- readline
 	
 ## Instalar dependencias en Debian 9
 ```debian
@@ -59,7 +60,7 @@ sudo apt install git python python-pip
 ```
 
 ```python
-pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs twitter tweepy
+pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs twitter tweepy readline
 ```
 ---
 
