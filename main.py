@@ -67,7 +67,15 @@ def leerCSV():
 	print('[+]Archivo Publicar.csv abierto en modo LECTURA')
 leerCSV()
 
+##TODO
+#Función para contar el total de líneas en el archivo CSV generado y abierto
+def contar_Lineas():
+	print('Contando líneas en ' + ARCHIVO_ENTRADA)
+	#ARCHIVO_ENTRADA
+
+##TOFIX
 #Conectar a la API de Twitter
+#Integrar excepciones y controles en API_Twitter.py
 def conectar_Twitter():
 	print('[+]Conectando con la API de Twitter')
 	print('[+]Espera un momento mientras se establece la conexión')
@@ -90,42 +98,41 @@ def conectar_Twitter():
 	tmp = 0 #Reseteando variable local
 #conectar_Twitter() #DESCOMENTAR PARA EJECUTAR
 
-#Leer línea según contador
-#Calcular total de líneas para saber cuando parar o comenzar a repetir Twitts
-#Llevar contador de la línea actual
-#Saltar líneas en blanco o con menos de 10 carácteres
-#Pasar variables necesarias en más funcionesa generales en VAR.py
-TOTAL_LINEAS = ''
-LINEA_ACTUAL = ''
-
 #Publicar la cadena pasada a la función y aumentar el contador de línea
 def publicar_Twitter(publicacion):
 	API_Twitter.publicar(publicacion)
 	#Comprobar que se ha realizado correctamente (return true)
-	#Al publicar sin errores en todos los intentos = LINEA_ACTUAL + 1
-	#Comprobar si LINEA_ACTUAL = TOTAL_LINEAS reiniciar LINEA_ACTUAL = 0
+	#Al publicar sin errores en todos los intentos = LINEA_ACTUAL + 1 mediante siguiente_linea()
 
 #Función que comprueba que la línea actual cumpla requisitos de publicación
 def comprobar_linea(linea_test):
+	#Añadir aquí todas las condiciones que deben cumplir las líneas
 	if len(linea_test) > 10:
 		return true
 	else:
 		return false
 
-#Función a la que se pasa el número de línea y la convierte en cadena. Si está mal o en blanco toma la siguiente
-def linea_to_cadena(linea):
-	linea_to_cadena = ''
-	linea_incorrecta = True
-	print('[+]La línea' + linea + 'se procesa a cadena')
-
+#Función que controla la línea actual
+def siguiente_linea():
+	linea_incorrecta = False
 	#Comprueba variable linea y continua si está bien, sino busca la siguiente
-	if != comprobar_linea(linea):
+	if != comprobar_linea(LINEA_ACTUAL):
+		linea_incorrecta = True
 		where linea_incorrecta:
-			#Usar la función comprobar_linea y si no cumple (return false) pasar a la siguiente (LINEA_ACTUAL + 1 y comprobar de nuevo):
 			LINEA_ACTUAL = LINEA_ACTUAL + 1
 			if comprobar_linea(linea):
 				linea_incorrecta = False
 				break
+	#Si está en la última línea se vuelve a la primera
+	elif LINEA_ACTUAL == TOTAL_LINEAS:
+		LINEA_ACTUAL = 0
+
+
+#Función a la que se pasa el número de línea y la convierte en cadena.
+#Debe llegar siempre una línea bien formada, control en siguiente_linea() y comprobar_linea
+def linea_to_cadena(linea):
+	linea_to_cadena = ''
+	print('[+]La línea' + linea + 'se procesa a cadena')
 	#Extraer del archivo CSV la cadena correspondiente a la variable "linea"
 	#return cadena
 
