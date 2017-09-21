@@ -35,11 +35,11 @@ def existe_archivo(nombre):
 	return os.path.isfile(nombre) #Comprueba que existe un archivo --> os.path.isfile(fname) y os.path.islink(fname)
 
 #Comprobar si existe el archivo Publicar.ods o pedir nombre y ruta a otro ODS
-print('Buscando archivo: ' + ARCHIVO_ENTRADA)
+print('[+]Buscando archivo: ' + ARCHIVO_ENTRADA)
 if existe_archivo(ARCHIVO_ENTRADA):
-	print('Utilizando el Archivo ' + ARCHIVO_ENTRADA + ' de este mismo directorio')
+	print('[+]Utilizando el Archivo ' + ARCHIVO_ENTRADA + ' de este mismo directorio')
 else:
-	print('Archivo ' + ARCHIVO_ENTRADA + ' No encontrado')
+	print('[~]Archivo ' + ARCHIVO_ENTRADA + ' No encontrado')
 	ARCHIVO_ENTRADA = raw_input('Introduce la ruta completa hasta el archivo: ')
 
 #Convertir a CSV el archivo seleccionado
@@ -47,24 +47,24 @@ ODS_to_CSV.toODS(ARCHIVO_ENTRADA)
 
 #Comprobar que existe el archivo Publicar.csv donde están las publicaciones
 def comprobarCSV():
-	print('Comprobando que existe el archivo Publicar.csv')
+	print('[+]Comprobando que existe el archivo Publicar.csv')
 	if existe_archivo(ARCHIVO_ENTRADA):
-		print('El archivo Publicar.csv existe')
+		print('[+]El archivo Publicar.csv existe')
 	else:
-		print('El archivo Publicar.csv NO EXISTE, revisa manualmente este error')
+		print('[-]El archivo Publicar.csv NO EXISTE, revisa manualmente este error')
 		sys.exit(0) #Salir del script
 comprobarCSV()
 
 #Abrir CSV en solo lectura para poder publicar
 def leerCSV():
-	print('Abriendo el archivo Publicar.csv')
+	print('[+]Abriendo el archivo Publicar.csv')
 	try:
 		PUBLICACIONES = open('Publicar.csv', 'r')
 	except:
-		print('Error al abrir Publicar.csv')
-		print('Comprueba que existe y tienes permisos de lectura')
+		print('[-]Error al abrir Publicar.csv')
+		print('[-]Comprueba que existe y tienes permisos de lectura')
 		sys.exit(0)
-	print('Archivo Publicar.csv abierto en modo LECTURA')
+	print('[+]Archivo Publicar.csv abierto en modo LECTURA')
 leerCSV()
 
 #Conectar a la API de Twitter
@@ -79,7 +79,7 @@ def conectar_Twitter():
 			API_Twitter.conectar()
 		except:
 			tmp = tmp + 1
-			print('[-]No se ha podido conectar a la API de Twiiter, reintento ', tmp)
+			print('[-]No se ha podido conectar a la API de Twitter, reintento ', tmp)
 			if tmp < 10:
 				print('[~]Se reintentará en 3 segundos')
 				sleep(3)
@@ -90,6 +90,10 @@ def conectar_Twitter():
 	tmp = 0 #Reseteando variable local
 conectar_Twitter()
 
+#Leer línea según contador
+#Calcular total de líneas para saber cuando parar o comenzar a repetir Twitts
+#Llevar contador de la línea actual
+#Saltar líneas en blanco o con menos de 10 carácteres
 
 #Twittear 1 entrada cada X minutos (2 en total)
 
