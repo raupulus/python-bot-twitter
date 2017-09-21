@@ -14,12 +14,17 @@ Se continúa trabajando sobre el bot, ya es posible twittear pero se ha de solve
 
 ## Obejtivos del bot
 - [x] Exportar de ODS a CSV
+- [x] Conectar con API de Twitter
 - [ ] Publicar automáticamente
+- [ ] Marcar favoritos según patrones
+- [ ] Marcar favorito todo según quien comparta
+- [ ] Retwittear según patrones
+- [ ] Retwittear todo según quien comparta
 
 ---
 
 ## Datos del proyecto
-BOT solo probado en GNU/Linux Debian 9 y Fedora 26
+BOT solo probado en _GNU/Linux_ *Debian 9* y *Fedora 26*
 
 Para las publicaciones es necesario que exista un archivo en formato y con la extensión "ods" en el mismo directorio o pedirá elegir donde obtenerlo mediante una ruta absoluta en el sistema. Dicho archivo se busca por defecto en el mismo directorio del bot con el siguiente nombre "publicar.ods"
 
@@ -34,6 +39,7 @@ Para las publicaciones se utiliza un archivo LibreCalc en formato ODS donde la c
 - main.py → Contiene el programa principal, todas las llamadas y funcionamiento.
 - VAR.lst → Lista de variables para el funcionamiento del programa, incluyendo token de API twitter
 - ODS_to_CSV → Transforma oja de cálculo en formato ODS de LibreOffice a CSV para trabajar más sencillo
+- API_Twitter → Incluye las funciones para interactuar con la API de twitter, capa intermediaria entre el *main.py* y el módulo *tweepy*
 
 ## Dependencias
 Aquí se listan las dependencias necesarias para el correcto funcionamiento del bot
@@ -45,7 +51,9 @@ Aquí se listan las dependencias necesarias para el correcto funcionamiento del 
 	- tweepy
 	
 ## Instalar dependencias en Debian 9
+```debian
 sudo apt install git python python-pip
+```
 
 ```python
 pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs twitter tweepy
