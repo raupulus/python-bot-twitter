@@ -1,11 +1,11 @@
-#Patrones de retwitt separados por coma ","
-RETWITT = ''
+#Patrones de retwitt
+global RETWITT
 
 #Patrones de Twitt
-TWITT = ''
+global TWITT
 
 #Patrones de Favorito
-FAV = ''
+global FAV
 
 #Datos de API
 ACCESS_KEY = ''
@@ -13,12 +13,14 @@ ACCESS_SECRET = ''
 CONSUMER_KEY = ''
 CONSUMER_SECRET = ''
 
+#Archivo de publicaciones
 ARCHIVO_ENTRADA = 'Publicar.ods'
-ARCHIVO_CSV = ''
 
+global ARCHIVO_CSV
 
+#Contador de lineas
 TOTAL_LINEAS = ''
-LINEA_ACTUAL = ''
+global LINEA_ACTUAL
 
 #Activar DEBUG
 DEBUG = True

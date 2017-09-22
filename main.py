@@ -36,7 +36,7 @@ def existe_archivo(nombre):
 #Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
 def convertir_archivo():
 	global ARCHIVO_ENTRADA
-	print('[+]Buscando archivo: ' + ARCHIVO_ENTRADA)
+	print('\n[+]Buscando archivo: ' + ARCHIVO_ENTRADA)
 	if existe_archivo(ARCHIVO_ENTRADA):
 		print('[+]Utilizando el Archivo ' + ARCHIVO_ENTRADA + ' de este mismo directorio')
 		ODS_to_CSV.toODS(ARCHIVO_ENTRADA)
@@ -47,7 +47,7 @@ convertir_archivo()
 
 #Comprobar que existe el archivo Publicar.csv donde están las publicaciones
 def comprobarCSV():
-	print('[+]Comprobando que existe el archivo Publicar.csv')
+	print('\n[+]Comprobando que existe el archivo Publicar.csv')
 	if existe_archivo(ARCHIVO_ENTRADA):
 		print('[+]El archivo Publicar.csv existe')
 	else:
@@ -57,8 +57,9 @@ comprobarCSV()
 
 #Función para contar el total de líneas en el archivo CSV
 def contar_lineas():
+	global ARCHIVO_CSV
 	global TOTAL_LINEAS
-	print('[+]Contando líneas en Publicar.csv')
+	print('\n[+]Contando líneas en Publicar.csv')
 	try:
 		ARCHIVO_CSV = open('Publicar.csv', 'r')
 		TOTAL_LINEAS = len(ARCHIVO_CSV.readlines())
@@ -67,13 +68,14 @@ def contar_lineas():
 		print('[-]Error al abrir Publicar.csv')
 		print('[-]Comprueba que existe y tienes permisos de lectura')
 		sys.exit(0)
-	print('[+]Se han contado en el Archivo ', TOTAL_LINEAS, ' lineas en total')
+	print('[+]Se han contado en el Archivo ' + str(TOTAL_LINEAS) + ' lineas en total')
 	sleep(5)
 contar_lineas()
 
 #Abrir CSV en solo lectura para poder publicar
 def leerCSV():
-	print('[+]Abriendo el archivo Publicar.csv')
+	global ARCHIVO_CSV
+	print('\n[+]Abriendo el archivo Publicar.csv')
 	try:
 		ARCHIVO_CSV = open('Publicar.csv', 'r')
 	except:
@@ -85,9 +87,9 @@ leerCSV()
 
 ##TOFIX
 #Conectar a la API de Twitter
-#Integrar excepciones y controles en API_Twitter.py
+#Integrar excepciones aquí existentes y controles en API_Twitter.py
 def conectar_Twitter():
-	print('[+]Conectando con la API de Twitter')
+	print('\n[+]Conectando con la API de Twitter')
 	print('[+]Espera un momento mientras se establece la conexión')
 
 	tmp = 0
@@ -103,9 +105,7 @@ def conectar_Twitter():
 				sleep(3)
 			elif tmp == 10:
 				print('[-]Se han realizado 10 intentos de conexión sin éxito')
-
 	print('[Se reintentará más tarde')
-	tmp = 0 #Reseteando variable local
 #conectar_Twitter() #DESCOMENTAR PARA EJECUTAR
 
 #Publicar la cadena pasada a la función y aumentar el contador de línea
@@ -117,7 +117,7 @@ def publicar_Twitter(publicacion):
 #Función que comprueba que la línea actual cumpla requisitos de publicación
 def comprobar_linea(linea_test):
 	#Añadir aquí todas las condiciones que deben cumplir las líneas
-	if len(linea_test) > 10:
+	if len(linea_test) >= 10 and len(linea_test) <= 140:
 		return true
 	else:
 		return false
@@ -156,7 +156,5 @@ def linea_to_cadena(linea):
 #Estructura para controlar el tiempo total que trabajará el bot (o hasta infinito)
 
 #Preparando para cerrar
-#ARCHIVO_CSV.close()
-
-print('avasf')
-print(TOTAL_LINEAS)
+print('\n[+]Cerrando Script')
+ARCHIVO_CSV.close()
