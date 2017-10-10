@@ -110,15 +110,6 @@ def conectar_Twitter():
     print('[Se reintentará más tarde')
 #conectar_Twitter() #DESCOMENTAR PARA EJECUTAR
 
-#Publicar la cadena pasada a la función y aumentar el contador de línea
-def publicar_Twitter(publicacion):
-    API_Twitter.publicar(publicacion)
-    #Comprobar que se ha realizado correctamente (return true)
-    #Al publicar sin errores en todos los intentos = LINEA_ACTUAL + 1 mediante siguiente_linea()
-
-
-# TOFIX → Reparar gestión de línea actual desde ARRAY_ENTRADAS
-
 # Función que comprueba que la línea actual cumpla requisitos de publicación
 def comprobar_linea(linea_test):
     if ((len(linea_test) >= 20) and (len(linea_test) <= 140)):
@@ -129,7 +120,6 @@ def comprobar_linea(linea_test):
 # Función que controla la línea actual
 def siguiente_linea():
     global LINEA_ACTUAL
-    print(LINEA_ACTUAL)
     linea_incorrecta = False
     if not comprobar_linea(ARRAY_ENTRADAS[LINEA_ACTUAL]):
         linea_incorrecta = True
@@ -147,11 +137,19 @@ def siguiente_linea():
     else :
         LINEA_ACTUAL = 0
 
-#Bucle temporal que llama a la función para crear la cadena a publicar a partir de la línea
-while True:
-    print ARRAY_ENTRADAS[LINEA_ACTUAL]
-    siguiente_linea()
-    sleep(3)
+
+
+
+
+#Función de pruebas 1 → Muestra cada publicación sin publicarla
+def test0():
+    #Bucle temporal que llama a la función para crear la cadena a publicar a partir de la línea
+    while True:
+        print ("[+] Entrada " + str(LINEA_ACTUAL) + " → " + ARRAY_ENTRADAS[LINEA_ACTUAL])
+        siguiente_linea()
+        sleep(5)
+test0()
+
 
 #Twittear 1 entrada cada X minutos (2 en total)
 
