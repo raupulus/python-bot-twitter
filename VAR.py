@@ -20,7 +20,7 @@ global ARCHIVO_CSV
 
 #Contador de lineas
 TOTAL_LINEAS = ''
-LINEA_ACTUAL = 0
+global LINEA_ACTUAL
 
 #Array con las entradas
 global ARRAY_ENTRADAS
