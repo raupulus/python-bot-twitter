@@ -151,6 +151,16 @@ def test0():
 test0()
 
 
+#Función para solo publicar cada 1h mientras se prueba funcionamiento
+def test1():
+    while True:
+        conectar_Twitter()
+        API_Twitter.publicar(ARRAY_ENTRADAS[LINEA_ACTUAL])
+        siguiente_linea()
+        sleep(7200) # 2 Horas entre publicaciones
+#test1
+
+
 #Twittear 1 entrada cada X minutos (2 en total)
 
 #Agregar 1 favorito cada X minutos (3 en total)
