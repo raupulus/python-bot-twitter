@@ -20,7 +20,7 @@ global ARCHIVO_CSV
 
 #Contador de lineas
 TOTAL_LINEAS = ''
-global LINEA_ACTUAL
+LINEA_ACTUAL = 0
 
 #Activar DEBUG
 DEBUG = True
