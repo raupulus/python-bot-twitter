@@ -28,10 +28,12 @@ from VAR import * #importar todas las variables
 ##         Variables        ##
 ##############################
 sleep = time.sleep #variable para usar con más comodidad el control de tiempo
+LINEA_ACTUAL = 0
+
 
 #Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
 def existe_archivo(nombre):
-	return os.path.isfile(nombre) #Comprueba que existe un archivo --> os.path.isfile(fname) y os.path.islink(fname)
+    return os.path.isfile(nombre) #Comprueba que existe un archivo --> os.path.isfile(fname) y os.path.islink(fname)
 
 #Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
 def convertir_archivo():
@@ -79,7 +81,7 @@ def leerCSV():
     print('\n[+]Abriendo el archivo Publicar.csv')
     try:
         ARCHIVO_CSV = open('Publicar.csv', 'r')
-        #ARRAY_ENTRADAS = ARCHIVO_CSV.read().splitlines()
+        ARRAY_ENTRADAS = ARCHIVO_CSV.read().splitlines()
     except:
         print('[-]Error al abrir Publicar.csv')
         print('[-]Comprueba que existe y tienes permisos de lectura')
@@ -120,12 +122,14 @@ def publicar_Twitter(publicacion):
 # Función que comprueba que la línea actual cumpla requisitos de publicación
 def comprobar_linea(linea_test):
     if ((len(linea_test) >= 20) and (len(linea_test) <= 140)):
-        return true
+        return True
     else:
-        return false
+        return False
 
 # Función que controla la línea actual
 def siguiente_linea():
+    global LINEA_ACTUAL
+    print(LINEA_ACTUAL)
     linea_incorrecta = False
     if not comprobar_linea(ARRAY_ENTRADAS[LINEA_ACTUAL]):
         linea_incorrecta = True
@@ -135,9 +139,11 @@ def siguiente_linea():
                 linea_incorrecta = False
                 break
     # Si está en la última línea se vuelve a la primera
-    elif LINEA_ACTUAL == TOTAL_LINEAS:
+    elif LINEA_ACTUAL == (TOTAL_LINEAS -1):
         LINEA_ACTUAL = 0
     # Si la línea actual es desconocida o errónea se pone a 0
+    elif comprobar_linea(ARRAY_ENTRADAS[LINEA_ACTUAL]):
+        LINEA_ACTUAL += 1
     else :
         LINEA_ACTUAL = 0
 
