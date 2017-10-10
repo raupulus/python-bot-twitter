@@ -75,9 +75,11 @@ contar_lineas()
 #Abrir CSV en solo lectura para poder publicar
 def leerCSV():
     global ARCHIVO_CSV
+    global ARRAY_ENTRADAS
     print('\n[+]Abriendo el archivo Publicar.csv')
     try:
         ARCHIVO_CSV = open('Publicar.csv', 'r')
+        #ARRAY_ENTRADAS = ARCHIVO_CSV.read().splitlines()
     except:
         print('[-]Error al abrir Publicar.csv')
         print('[-]Comprueba que existe y tienes permisos de lectura')
@@ -112,47 +114,38 @@ def publicar_Twitter(publicacion):
     #Comprobar que se ha realizado correctamente (return true)
     #Al publicar sin errores en todos los intentos = LINEA_ACTUAL + 1 mediante siguiente_linea()
 
-#Función que comprueba que la línea actual cumpla requisitos de publicación
+
+# TOFIX → Reparar gestión de línea actual desde ARRAY_ENTRADAS
+
+# Función que comprueba que la línea actual cumpla requisitos de publicación
 def comprobar_linea(linea_test):
-    #Añadir aquí todas las condiciones que deben cumplir las líneas
     if ((len(linea_test) >= 20) and (len(linea_test) <= 140)):
         return true
     else:
         return false
 
-#Función que controla la línea actual
+# Función que controla la línea actual
 def siguiente_linea():
     linea_incorrecta = False
-    #Comprueba variable linea y continua si está bien, sino busca la siguiente
-    if not comprobar_linea(LINEA_ACTUAL):
+    if not comprobar_linea(ARRAY_ENTRADAS[LINEA_ACTUAL]):
         linea_incorrecta = True
         while linea_incorrecta:
             LINEA_ACTUAL = LINEA_ACTUAL + 1
             if comprobar_linea(linea):
                 linea_incorrecta = False
                 break
-    #Si está en la última línea se vuelve a la primera
+    # Si está en la última línea se vuelve a la primera
     elif LINEA_ACTUAL == TOTAL_LINEAS:
         LINEA_ACTUAL = 0
     # Si la línea actual es desconocida o errónea se pone a 0
     else :
-        LINEA_ACTUAL == 0
-
-#Función a la que se pasa el número de línea y la convierte en cadena.
-def linea_to_cadena(linea):
-    # TOFIX → En la siguiente línea se pretende extraer a una variable la línea actual
-    #cadena = ARCHIVO_CSV[linea]
-    print('[+] La línea' + linea + 'se procesa a cadena')
-    #print('[+] Su valor es ' + cadena)
-    #Extraer del archivo CSV la cadena correspondiente a la variable "linea"
-    return cadena
+        LINEA_ACTUAL = 0
 
 #Bucle temporal que llama a la función para crear la cadena a publicar a partir de la línea
 while True:
-    #print(linea_to_cadena(LINEA_ACTUAL))
+    print ARRAY_ENTRADAS[LINEA_ACTUAL]
     siguiente_linea()
     sleep(3)
-
 
 #Twittear 1 entrada cada X minutos (2 en total)
 

@@ -22,5 +22,8 @@ global ARCHIVO_CSV
 TOTAL_LINEAS = ''
 LINEA_ACTUAL = 0
 
+#Array con las entradas
+global ARRAY_ENTRADAS
+
 #Activar DEBUG
 DEBUG = True
