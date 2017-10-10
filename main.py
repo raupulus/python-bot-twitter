@@ -85,9 +85,7 @@ def leerCSV():
 	print('[+]Archivo Publicar.csv abierto en modo LECTURA')
 leerCSV()
 
-##TOFIX
 #Conectar a la API de Twitter
-#Integrar excepciones aquí existentes y controles en API_Twitter.py
 def conectar_Twitter():
 	print('\n[+]Conectando con la API de Twitter')
 	print('[+]Espera un momento mientras se establece la conexión')
@@ -117,7 +115,7 @@ def publicar_Twitter(publicacion):
 #Función que comprueba que la línea actual cumpla requisitos de publicación
 def comprobar_linea(linea_test):
 	#Añadir aquí todas las condiciones que deben cumplir las líneas
-	if len(linea_test) >= 10 and len(linea_test) <= 140:
+	if ((len(linea_test) >= 20) and (len(linea_test) <= 140)):
 		return true
 	else:
 		return false
@@ -136,15 +134,24 @@ def siguiente_linea():
 	#Si está en la última línea se vuelve a la primera
 	elif LINEA_ACTUAL == TOTAL_LINEAS:
 		LINEA_ACTUAL = 0
-
+    # Si la línea actual es desconocida o errónea se pone a 0
+    else :
+        LINEA_ACTUAL == 0
 
 #Función a la que se pasa el número de línea y la convierte en cadena.
-#Debe llegar siempre una línea bien formada, control en siguiente_linea() y comprobar_linea
 def linea_to_cadena(linea):
-	linea_to_cadena = ''
-	print('[+]La línea' + linea + 'se procesa a cadena')
-	#Extraer del archivo CSV la cadena correspondiente a la variable "linea"
-	#return cadena
+    # TOFIX → En la siguiente línea se pretende extraer a una variable la línea actual
+    #cadena = ARCHIVO_CSV[linea]
+    print('[+] La línea' + linea + 'se procesa a cadena')
+    #print('[+] Su valor es ' + cadena)
+    #Extraer del archivo CSV la cadena correspondiente a la variable "linea"
+    return cadena
+
+#Bucle temporal que llama a la función para crear la cadena a publicar a partir de la línea
+while True:
+    #print(linea_to_cadena(LINEA_ACTUAL))
+    siguiente_linea()
+    sleep(3)
 
 
 #Twittear 1 entrada cada X minutos (2 en total)
