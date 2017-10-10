@@ -25,5 +25,11 @@ def conectar():
 #Función para Publicar en Twitter (Recibe una cadena de 1 sola línea a publicar)
 def publicar(publicacion):
 	print("[+] Twitteando la siguiente entrada...")
-	api.update_status(status = publicacion)
-	print("[+] Tweet: ", publicacion)
+	try:
+        api.update_status(status = publicacion)
+        print("[+] Tweet: " + publicacion)
+        return True
+    except:
+        print("[-] No se ha logrado publicar")
+        return False
+
