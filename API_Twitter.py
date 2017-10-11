@@ -44,3 +44,7 @@ def seguir():
     for follower in tweepy.Cursor(api.followers).items(10):
         follower.follow()
         print ("Se ha declarado seguir a → " + follower.screen_name)
+
+#Función para retwittear últimos mensajes según patrón coincidente
+def retwittear():
+    print('Se retwitteará lo siguiente → ')
