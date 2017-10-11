@@ -38,3 +38,9 @@ def leer_timeline():
     public_tweets = api.home_timeline(50)
     for tweet in public_tweets:
         print "[+] %s" % tweet.text
+
+#Seguir a quien me sigue y cumple unos patrones (Solo compruebo los 10 últimos seguidores)
+def seguir():
+    for follower in tweepy.Cursor(api.followers).items(10):
+        follower.follow()
+        print ("Se ha declarado seguir a → " + follower.screen_name)
