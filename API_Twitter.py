@@ -48,3 +48,13 @@ def seguir():
 #Función para retwittear últimos mensajes según patrón coincidente
 def retwittear():
     print('Se retwitteará lo siguiente → ')
+
+#Guardar información de un usuario específico que se pasa a la función
+def recopilar_info(usuario):
+    user = api.get_user(usuario)
+    #TOFIX → Estos datos se guardarán en CVS o BD
+    print "Nombre público o Nick → " + user.screen_name
+    print "Cantidad de seguidores → " + user.followers_count
+    print " <<<<< LISTA DE AMIGOS >>>>>"
+    for friend in user.friends():
+        print friend.screen_name
