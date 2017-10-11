@@ -9,9 +9,6 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
-##TODO
-##Comprobar líneas antes de entrar → No puede estar vacía, ir a la siguiente
-
 ##############################
 ##    Importar Librerías    ##
 ##############################
@@ -159,6 +156,17 @@ def test1():
         siguiente_linea()
         sleep(7200) # 2 Horas entre publicaciones
 #test1
+
+
+#Función para publicar cada 6 horas
+def test2():
+    while True:
+        conectar_Twitter()
+        API_Twitter.publicar(ARRAY_ENTRADAS[LINEA_ACTUAL])
+        siguiente_linea()
+        sleep(21600) # 6 Horas entre publicaciones
+#test2
+
 
 
 #Twittear 1 entrada cada X minutos (2 en total)
