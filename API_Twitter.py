@@ -33,3 +33,8 @@ def publicar(publicacion):
         print("[-] No se ha logrado publicar")
         return False
 
+#Función para Leer en el timeline las 50 publicaciones últimas
+def leer_timeline():
+    public_tweets = api.home_timeline(50)
+    for tweet in public_tweets:
+        print "[+] %s" % tweet.text
