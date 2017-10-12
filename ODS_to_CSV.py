@@ -9,10 +9,12 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
-#Función para crear un archivo CSV a partir del ODS pasado usando solo la columna "B"
+
+#Función para crear un archivo CSV a partir del ODS
+#Se usará solo la columna "B" del archivo pasado (por ahora)
 def toODS(nombreArchivo):
     import pyexcel as pe
-    import codecs #Librería para codificar en UTF-8 (Error al write ñ)
+    import codecs  # Librería para codificar en UTF-8 (Error al write ñ)
 
     #Solo extraer la columna "B" de cada hoja
     HOJAS = pe.get_book(file_name=nombreArchivo, start_column=1, column_limit=1)

@@ -15,12 +15,13 @@ Se continúa trabajando sobre el bot, ya es posible twittear pero se ha de solve
 ## Obejtivos del bot
 - [x] Exportar de ODS a CSV
 - [x] Conectar con API de Twitter
-- [ ] Convertir número de línea a cadena
-- [ ] Publicar automáticamente todas las líneas del CSV
+- [x] Convertir número de línea a cadena
+- [x] Publicar automáticamente todas las líneas del CSV
 - [ ] Marcar favoritos según patrones
 - [ ] Marcar favorito todo según quien comparta
 - [ ] Retwittear según patrones
 - [ ] Retwittear todo según quien comparta
+- [ ] Estadísticas de seguimiento a otros usuarios recopilando información a una BD
 - [ ] Conectar a BD SQLite local donde se controla las veces que se publica cada una
 - [ ] Publicaciones aleatorias de todo el archivo, solo se repite a partir de 10 días una publicación (comprobar fecha) y la publicación más twitteada no puede distar más de 3 sobre la menos publicada. Así se equilibra que una se publique mucho más que otra creando cierta aletoriedad
 
@@ -48,18 +49,18 @@ Para las publicaciones se utiliza un archivo LibreCalc en formato ODS donde la c
 Aquí se listan las dependencias necesarias para el correcto funcionamiento del bot
 - python 2.7
 - Módulos/Librerías python externos
-	- pyexcel-ods
-	- twitter
-	- codecs
-	- tweepy
-	- readline
-	
+    - pyexcel-ods
+    - twitter
+    - codecs
+    - tweepy
+    - readline
+
 ## Instalar dependencias en Debian 9
-```debian
+```shell
 sudo apt install git python python-pip
 ```
 
-```python
+```shell
 pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs twitter tweepy readline
 ```
 ---
