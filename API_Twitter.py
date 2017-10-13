@@ -16,7 +16,9 @@
 ##Función para retwittear todo lo de un array de personas
 ##Función para seguir a quien me siga si cumple un patrón
 
-
+#class API_TWITTER:
+#def __init__(self, x, y): #Iniciar
+#def __str__(self): #Reescribir string
 #Función para conectar con la API de Twitter (Variables en VAR.py)
 def conectar():
     #TOFIX → No hacer globales estos valores y crear aquí clase
