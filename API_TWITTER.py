@@ -14,7 +14,7 @@
 ##############################
 import tweepy  # Librería para facilitar uso de API de twitter
 
-##TODO
+##TOFIX las siguientes funciones
 ##Función para dar favorito
 ##Función para analizar comentarios de un tweet
 ##Función para retwittear todo lo de un array de personas
