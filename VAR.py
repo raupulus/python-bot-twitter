@@ -18,10 +18,6 @@ ARCHIVO_ENTRADA = 'Publicar.ods'
 
 global ARCHIVO_CSV
 
-#Contador de lineas
-TOTAL_LINEAS = ''
-global LINEA_ACTUAL
-
 #Array con las entradas
 global ARRAY_ENTRADAS
 

@@ -1,97 +1,54 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
 
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
+#################################################
+# ###                                     Raúl Caro Pastorino                                     ### #
+## ##                                                                                                         ## ##
+### #                                 https://github.com/fryntiz/                                # ###
+## ##                                                                                                         ## ##
+# ###                                         www.fryntiz.es                                         ### #
+#################################################
+
+# Este script se está planteando para muchos perfiles distintos pero se bloqueará
+# hasta llegar a un punto más avanzado a solo 1 perfil (posición 0 en array's)'
 
 ##############################
-##    Importar Librerías    ##
+##                    Importar Librerías                    ##
 ##############################
 import time  # Importamos la libreria time --> time.sleep
 import sys  # Importar comandos del sistema, por ejemplo exit
 import os  # Importar lib para interactuar con el sistema
 import random  # Genera números aleatorios --> random.randrange(1,100)
-import tweepy  # Librería para facilitar uso de API de twitter
-import ODS_to_CSV  # Importa de este directorio el script para convertir a CSV
-import API_Twitter  # Importa script para conectar con Twitter
+import convert_ODS  # Importa de este directorio el script para convertir a CSV
 from VAR import *  # importar todas las variables
 
 ##############################
 ##         Variables        ##
 ##############################
 sleep = time.sleep  # variable para usar con más comodidad el control de tiempo
-LINEA_ACTUAL = 0
 
 
-#Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
-def existe_archivo(nombre):
-    return os.path.isfile(nombre)  # Comprobar que existe el archivo en el dir
-
+# Array con cada objeto perfil
+PERFILES[0] = API_TWITTER(0, "perfil1", "asd", "asd", "asd", "asd")
 
 #Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
-def convertir_archivo():
-    global ARCHIVO_ENTRADA
-    print('\n[+]Buscando archivo: ' + ARCHIVO_ENTRADA)
-    if existe_archivo(ARCHIVO_ENTRADA):
-        print('[+]Utilizando el Archivo ' + ARCHIVO_ENTRADA)
-        ODS_to_CSV.toODS(ARCHIVO_ENTRADA)
+def inicializar():
+    print('\n[+]Buscando archivo → Publicar.ods')
+    if existe_archivo(Publicar.ods):
+        print('[+]Utilizando el Archivo Publicar.ods')
+        # Convertir ODS en CSV
+        convert_ODS.toCSV("Publicar.ods")
     else:
-        print('[~]Archivo ' + ARCHIVO_ENTRADA + ' No encontrado')
+        print('[~]Archivo Publicar.ods no encontrado')
         ARCHIVO_ENTRADA = raw_input('Ruta completa hasta el archivo: ')
-convertir_archivo()
 
-
-#Comprobar que existe el archivo Publicar.csv donde están las publicaciones
-def comprobarCSV():
-    print('\n[+]Comprobando que existe el archivo Publicar.csv')
-    if existe_archivo(ARCHIVO_ENTRADA):
-        print('[+]El archivo Publicar.csv existe')
-    else:
-        print('[-]El archivo Publicar.csv NO EXISTE, revísalo')
-        sys.exit(0)  # Salir del script
-comprobarCSV()
-
-
-#Función para contar el total de líneas en el archivo CSV
-def contar_lineas():
-    global ARCHIVO_CSV
-    global TOTAL_LINEAS
-    print('\n[+]Contando líneas en Publicar.csv')
-    try:
-        ARCHIVO_CSV = open('Publicar.csv', 'r')
-        TOTAL_LINEAS = len(ARCHIVO_CSV.readlines())
-        ARCHIVO_CSV.close()
-    except:
-        print('[-]Error al abrir Publicar.csv')
-        print('[-]Comprueba que existe y tienes permisos de lectura')
-        sys.exit(0)
-    print('[+]Total de líneas contadas ' + str(TOTAL_LINEAS) + ' líneas')
-    sleep(5)
-contar_lineas()
-
-
-#Abrir CSV en solo lectura para poder publicar
-def leerCSV():
-    global ARCHIVO_CSV
-    global ARRAY_ENTRADAS
-    print('\n[+]Abriendo el archivo Publicar.csv')
-    try:
-        ARCHIVO_CSV = open('Publicar.csv', 'r')
-        ARRAY_ENTRADAS = ARCHIVO_CSV.read().splitlines()
-    except:
-        print('[-]Error al abrir Publicar.csv')
-        print('[-]Comprueba que existe y tienes permisos de lectura')
-        sys.exit(0)
-    print('[+]Archivo Publicar.csv abierto en modo LECTURA')
-leerCSV()
+    # Array con cada entradas. La posición coincide con posición en PERFILES
+    ENTRADAS[0] = publicacion("Publicar.csv")
+inicializar()
 
 
 #Conectar a la API de Twitter
+#Probablemente sobre esta función
 def conectar_Twitter():
     print('\n[+]Conectando con la API de Twitter')
     print('[+]Espera un momento mientras se establece la conexión')
@@ -113,34 +70,17 @@ def conectar_Twitter():
 #conectar_Twitter() #DESCOMENTAR PARA EJECUTAR
 
 
-# Función que comprueba que la línea actual cumpla requisitos de publicación
-def comprobar_linea(linea_test):
-    if ((len(linea_test) >= 20) and (len(linea_test) <= 140)):
-        return True
-    else:
-        return False
+# Publicar
+def publicar():
+    print('[+] Preparando para publicar')
 
+# Retwittear
+def retwittear():
+    print('[+] Preparando para retwittear')
 
-# Función que controla la línea actual
-def siguiente_linea():
-    global LINEA_ACTUAL
-    linea_incorrecta = False
-    if not comprobar_linea(ARRAY_ENTRADAS[LINEA_ACTUAL]):
-        linea_incorrecta = True
-        while linea_incorrecta:
-            LINEA_ACTUAL = LINEA_ACTUAL + 1
-            if comprobar_linea(linea):
-                linea_incorrecta = False
-                break
-    # Si está en la última línea se vuelve a la primera
-    elif LINEA_ACTUAL == (TOTAL_LINEAS - 1):
-        LINEA_ACTUAL = 0
-    # Si la línea actual es desconocida o errónea se pone a 0
-    elif comprobar_linea(ARRAY_ENTRADAS[LINEA_ACTUAL]):
-        LINEA_ACTUAL += 1
-    else:
-        LINEA_ACTUAL = 0
-
+# Seguir
+def seguir():
+    print('[+] Preparando para seguir')
 
 
 
@@ -186,5 +126,5 @@ def test2():
 #Estructura para controlar el tiempo total que trabajará el bot (o hasta infinito)
 
 #Preparando para cerrar
-print('\n[+]Cerrando Script')
-ARCHIVO_CSV.close()
+#print('\n[+]Cerrando Script')
+#ARCHIVO_CSV.close()
