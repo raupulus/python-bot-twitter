@@ -90,8 +90,7 @@ def seguir():
 def test0():
     #Bucle temporal para crear la cadena a publicar a partir de la línea
     while True:
-        print ("[+] Entrada " + str(LINEA_ACTUAL) + " → " + ARRAY_ENTRADAS[LINEA_ACTUAL])
-        siguiente_linea()
+        print ('[+] Entrada ')
         sleep(5)
 test0()
 
@@ -99,9 +98,7 @@ test0()
 #Función para solo publicar cada 1h mientras se prueba funcionamiento
 def test1():
     while True:
-        conectar_Twitter()
-        API_Twitter.publicar(ARRAY_ENTRADAS[LINEA_ACTUAL])
-        siguiente_linea()
+        print('[+] Entrada ')
         sleep(7200)  # 2 Horas entre publicaciones
 #test1
 
@@ -109,9 +106,7 @@ def test1():
 #Función para publicar cada 6 horas
 def test2():
     while True:
-        conectar_Twitter()
-        API_Twitter.publicar(ARRAY_ENTRADAS[LINEA_ACTUAL])
-        siguiente_linea()
+        print('[+] Entrada ')
         sleep(21600)  # 6 Horas entre publicaciones
 #test2
 
