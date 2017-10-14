@@ -65,29 +65,6 @@ def inicializar():
 inicializar()
 
 
-#Conectar a la API de Twitter
-#Probablemente sobre esta función
-def conectar_Twitter():
-    print('\n[+]Conectando con la API de Twitter')
-    print('[+]Espera un momento mientras se establece la conexión')
-
-    tmp = 0
-    while tmp <= 10:
-        try:
-            print('[+]Llamar a la función para conectar')
-            API_Twitter.conectar()
-        except:
-            tmp = tmp + 1
-            print('[-]No se ha conectado a la API de Twitter, reintento ', tmp)
-            if tmp < 10:
-                print('[~]Se reintentará en 3 segundos')
-                sleep(3)
-            elif tmp == 10:
-                print('[-]Se han realizado 10 intentos de conexión sin éxito')
-    print('[Se reintentará más tarde')
-#conectar_Twitter() #DESCOMENTAR PARA EJECUTAR
-
-
 # Publicar
 def publicar():
     print('[+] Preparando para publicar')
@@ -133,6 +110,7 @@ def test2():
         sleep(21600)  # 6 Horas entre publicaciones
 #test2
 
+
 #Obtiene el timeline agregándolo a un archivo
 def test3():
     print('Conectando API')
@@ -150,6 +128,6 @@ def test3():
 
 #Estructura para controlar el tiempo total que trabajará el bot (o infinito)
 
-#Preparando para cerrar
+#Preparando para cerrar script
 #print('\n[+]Cerrando Script')
 #ARCHIVO_CSV.close()
