@@ -34,18 +34,15 @@ class API_TWITTER:
 
     def __init__(self, pos, nom, C_K, C_S, A_K, A_S):
         print('Construyendo Clase')
-        global posicion, nombre
-        global CONSUMER_KEY, CONSUMER_SECRET, ACCESS_KEY, ACCESS_SECRET
-        posicion = pos
-        nombre = nom
-        CONSUMER_KEY = C_K
-        CONSUMER_SECRET = C_S
-        ACCESS_KEY = A_K
-        ACCESS_SECRET = A_S
+        self.posicion = pos
+        self.nombre = nom
+        self.CONSUMER_KEY = C_K
+        self.CONSUMER_SECRET = C_S
+        self.ACCESS_KEY = A_K
+        self.ACCESS_SECRET = A_S
 
     def __srt__(self):
-        global nombre, posicion
-        return nombre + " posición → " + posicion
+        return self.nombre + " posición → " + self.posicion
 
 #Función para conectar con la API de Twitter (Variables en VAR.py)
     def conectar():
