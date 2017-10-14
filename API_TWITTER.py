@@ -33,7 +33,7 @@ class API_TWITTER:
     ACCESS_SECRET = ''
 
     def __init__(self, pos, nom, C_K, C_S, A_K, A_S):
-        print('Construyendo Clase')
+        print('[!] Creando perfil con nombre → ' + nom + ' en posición' + pos)
         self.posicion = pos
         self.nombre = nom
         self.CONSUMER_KEY = C_K
@@ -41,24 +41,27 @@ class API_TWITTER:
         self.ACCESS_KEY = A_K
         self.ACCESS_SECRET = A_S
 
+#Cadena a devolver cuando se convierta el objeto a STR
     def __srt__(self):
         return self.nombre + " posición → " + self.posicion
 
 #Función para conectar con la API de Twitter (Variables en VAR.py)
-    def conectar():
-        global API
-        global CONSUMER_KEY, CONSUMER_SECRET, ACCESS_KEY, ACCESS_SECRET
+    def conectar(self):
         print('Conectando con la API')
-        autenticar = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-        autenticar.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-        API = tweepy.API(autenticar)
+        autenticar = tweepy.OAuthHandler(
+            self.CONSUMER_KEY,
+            self.CONSUMER_SECRET)
+        autenticar.set_access_token(
+            self.ACCESS_KEY,
+            self.ACCESS_SECRET)
+        self.API = tweepy.API(autenticar)
 
 #Función para Publicar en Twitter (Recibe una cadena de 1 sola línea a publicar)
-    def publicar(publicacion):
+    def publicar(self, publicacion):
         global API
         print("[+] Twitteando la siguiente entrada...")
         try:
-            API.update_status(status=publicacion)
+            self.API.update_status(status=publicacion)
             print("[+] Tweet: " + publicacion)
             return True
         except:
@@ -66,30 +69,27 @@ class API_TWITTER:
             return False
 
 #Función para Leer en el timeline las 50 publicaciones últimas
-    def leer_timeline():
-        global API
-        public_tweets = API.home_timeline(50)
+    def leer_timeline(self):
+        public_tweets = self.API.home_timeline(50)
         for tweet in public_tweets:
             print "[+] %s" % tweet.text
 
 #Seguir a quien me sigue y cumple unos patrones
 #(Solo compruebo los 10 últimos seguidores)
-    def seguir():
-        global API
-        for follower in tweepy.Cursor(API.followers).items(10):
+    def seguir(self):
+        for follower in tweepy.Cursor(self.API.followers).items(10):
             follower.follow()
             print ("Se ha declarado seguir a → " + follower.screen_name)
 
 #Función para retwittear últimos mensajes según patrón coincidente
-    def retwittear():
+    def retwittear(self):
         print('Se retwitteará lo siguiente → ')
 
 #Guardar información de un usuario específico que se pasa a la función
-    def recopilar_info(usuarios):
+    def recopilar_info(self, usuarios):
         #TOFIX → usuarios es un array con la cantidad de usuarios a vigilar
-        global API
         for usuario in usuarios:
-            user = API.get_user(usuario)
+            user = self.API.get_user(usuario)
             #TOFIX → Estos datos se guardarán en CVS o BD
             print "Nombre público o Nick → " + user.screen_name
             print "Cantidad de seguidores → " + user.followers_count
