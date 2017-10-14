@@ -13,6 +13,7 @@
 ##    Importar Librerías    ##
 ##############################
 import tweepy  # Librería para facilitar uso de API de twitter
+from time import sleep  # Importamos la libreria time --> time.sleep
 
 ##TOFIX las siguientes funciones
 ##Función para dar favorito
@@ -47,14 +48,29 @@ class API_TWITTER:
 
 #Función para conectar con la API de Twitter (Variables en VAR.py)
     def conectar(self):
-        print('Conectando con la API')
-        autenticar = tweepy.OAuthHandler(
-            self.CONSUMER_KEY,
-            self.CONSUMER_SECRET)
-        autenticar.set_access_token(
-            self.ACCESS_KEY,
-            self.ACCESS_SECRET)
-        self.API = tweepy.API(autenticar)
+        print('\n[+]Conectando con la API de Twitter')
+        print('[+]Espera un momento mientras se establece la conexión')
+
+        tmp = 0
+        while tmp <= 10:
+            try:
+                print('[!]Conectando con la API')
+                autenticar = tweepy.OAuthHandler(
+                    self.CONSUMER_KEY,
+                    self.CONSUMER_SECRET)
+                autenticar.set_access_token(
+                    self.ACCESS_KEY,
+                    self.ACCESS_SECRET)
+                self.API = tweepy.API(autenticar)
+            except:
+                tmp = tmp + 1
+                print('[-]No se ha conectado a la API, reintento → ', tmp)
+                if tmp < 10:
+                    print('[~]Se reintentará en 7 segundos')
+                    sleep(7)
+                elif tmp == 10:
+                    print('[-]Se han realizado 10 intentos de conectar')
+        print('[!] Se reintentará más tarde')
 
 #Función para Publicar en Twitter (Recibe una cadena de 1 sola línea a publicar)
     def publicar(self, publicacion):
