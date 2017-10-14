@@ -34,7 +34,8 @@ class API_TWITTER:
     ACCESS_SECRET = ''
 
     def __init__(self, pos, nom, C_K, C_S, A_K, A_S):
-        print('[!] Creando perfil con nombre → ' + nom + ' en posición' + pos)
+        print('[!] Creando perfil con nombre → ' +
+            str(nom) + ' en posición' + str(pos))
         self.posicion = pos
         self.nombre = nom
         self.CONSUMER_KEY = C_K
