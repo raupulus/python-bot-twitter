@@ -9,6 +9,9 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
+#Esto es una librería de funciones que ayuda a cambiar entre formatos archivos
+#de entrada, principalmente de ODS a CSV
+
 import pyexcel as pe
 import codecs  # Librería para codificar en UTF-8 (Error al write ñ)
 import os  # Importar lib para interactuar con el sistema
@@ -26,7 +29,7 @@ def existe_archivo(ruta_archivo):
 #Función para crear un archivo CSV a partir del ODS
 #Se usará solo la columna "B" del archivo pasado (por ahora)
 def toCSV(ruta_archivo):
-    columna_inicio, columna_limite
+    global columna_inicio, columna_limite
     if existe_archivo(ruta_archivo):
         #Solo extraer la columna "B" de cada hoja
         HOJAS = pe.get_book(
@@ -53,9 +56,9 @@ def toCSV(ruta_archivo):
         return False
 
 
-def toBD(ruta_archivo):
-    print('Añadiendo a la BD')
-
-
 def toTXT(ruta_archivo):
-    print('Creando Publicar.txt')
+    print('Creando Publicar.txt (No implementado)')
+
+
+def toBD(ruta_archivo):
+    print('Añadiendo a la BD (No implementado)')
