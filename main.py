@@ -46,6 +46,7 @@ def existe_archivo(ruta_archivo):
 
 #Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
 def inicializar():
+    #Llamar desde aquí a crear_perfiles()
     global ENTRADAS
     print('\n[+]Buscando archivo → Publicar.ods')
     if existe_archivo('Publicar.ods'):
@@ -80,7 +81,15 @@ def seguir():
     print('[+] Preparando para seguir')
 
 
+# Programa principal para interactuar con el bot
+def panel_control():
+    print('Elige una opción de las siguientes (No Implementado')
+#panel_control()
 
+
+# Depuración del programa
+def depurador():
+    print('Se ha ejecutado el modo depurador (No Implementado)')
 
 
 #Función de pruebas 1 → Muestra cada publicación sin publicarla
@@ -118,16 +127,4 @@ def test3():
     print('Pasándolo al archivo XXXX')
 #test3
 
-
-
-#Twittear 1 entrada cada X minutos (2 en total)
-
-#Agregar 1 favorito cada X minutos (3 en total)
-
-#Retwittear 1 twitt cada X minutos (5 en total)
-
-#Estructura para controlar el tiempo total que trabajará el bot (o infinito)
-
-#Preparando para cerrar script
-#print('\n[+]Cerrando Script')
-#ARCHIVO_CSV.close()
+#Preparando para cerrar script → print('\n[+]Cerrando Script')
