@@ -9,20 +9,20 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
-# Este script se está planteando para muchos perfiles distintos pero se bloqueará
+# Este script se está planteando para muchos perfiles pero se bloqueará
 # hasta llegar a un punto más avanzado a solo 1 perfil (posición 0 en array's)'
 
 ##############################
 ##    Importar Librerías    ##
 ##############################
 import time  # Importamos la libreria time --> time.sleep
-import sys  # Importar comandos del sistema, por ejemplo exit
+#import sys  # Importar comandos del sistema, por ejemplo exit
 import os  # Importar lib para interactuar con el sistema
-import random  # Genera números aleatorios --> random.randrange(1,100)
+#import random  # Genera números aleatorios --> random.randrange(1,100)
 import convert_ODS  # Importa de este directorio el script para convertir a CSV
 from API_TWITTER import API_TWITTER
 from publicacion import publicacion
-from VAR import *  # importar todas las variables
+#from VAR import *  # importar todas las variables
 
 ##############################
 ##         Variables        ##
