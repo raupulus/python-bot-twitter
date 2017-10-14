@@ -32,7 +32,7 @@ PERFILES = ''
 ENTRADAS = ''
 
 
-# Array con cada objeto perfil
+# Array con cada objeto perfil (clase API_TWITTER)
 def crear_perfiles():
     global PERFILES
     PERFILES = [API_TWITTER(0, "perfil1", "asd", "asd", "asd", "asd")]
@@ -42,6 +42,7 @@ crear_perfiles()
 #Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
 def existe_archivo(ruta_archivo):
     return os.path.isfile(ruta_archivo)  # Comprobar que existe
+
 
 #Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
 def inicializar():
@@ -91,9 +92,11 @@ def conectar_Twitter():
 def publicar():
     print('[+] Preparando para publicar')
 
+
 # Retwittear
 def retwittear():
     print('[+] Preparando para retwittear')
+
 
 # Seguir
 def seguir():
@@ -116,7 +119,8 @@ test0()
 #Función para solo publicar cada 1h mientras se prueba funcionamiento
 def test1():
     while True:
-        print('[+] Entrada ')
+        print('\n[+] Entrada Publicada:\n' + ENTRADAS[0].publicacion_actual())
+        ENTRADAS[0].siguiente_linea()
         sleep(7200)  # 2 Horas entre publicaciones
 #test1
 
@@ -124,7 +128,8 @@ def test1():
 #Función para publicar cada 6 horas
 def test2():
     while True:
-        print('[+] Entrada ')
+        print('\n[+] Entrada Publicada:\n' + ENTRADAS[0].publicacion_actual())
+        ENTRADAS[0].siguiente_linea()
         sleep(21600)  # 6 Horas entre publicaciones
 #test2
 
