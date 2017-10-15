@@ -29,12 +29,25 @@ from publicacion import publicacion
 ##############################
 sleep = time.sleep  # variable para usar con más comodidad el control de tiempo
 PERFILES = ''
+CANTIDAD_PERFILES = 0
 ENTRADAS = ''
 
 
 # Array con cada objeto perfil (clase API_TWITTER)
 def crear_perfiles():
-    global PERFILES
+    global PERFILES, CANTIDAD_PERFILES
+
+
+
+
+
+    #Comprobar cantidad de carpetas dentro de "./Perfiles"
+    #No contar → Plantillas,plantillas,Plantilla,plantilla
+    #Extraer el nombre de la carpeta y pasarlo al constructor
+    #Leer archivo TOKEN.csv y pasar los parámetros al constructor
+    #Aumentar contador de id en constructor
+
+    #Crear un bucle donde añadir lo siguiente
     PERFILES = [API_TWITTER(0, "perfil1", "asd", "asd", "asd", "asd")]
 crear_perfiles()
 
@@ -99,7 +112,7 @@ def test0():
         print('\n[+] Entrada Publicada:\n' + ENTRADAS[0].publicacion_actual())
         ENTRADAS[0].siguiente_linea()
         sleep(5)
-test0()
+#test0()
 
 
 #Función para solo publicar cada 1h mientras se prueba funcionamiento
@@ -125,6 +138,13 @@ def test3():
     print('Conectando API')
     print('Obteniendo timeline')
     print('Pasándolo al archivo XXXX')
+#test3
+
+
+#
+def test4():
+    print('test')
+
 #test3
 
 #Preparando para cerrar script → print('\n[+]Cerrando Script')
