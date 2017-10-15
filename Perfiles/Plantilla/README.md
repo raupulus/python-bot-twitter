@@ -13,3 +13,10 @@ a el mismo directorio del perfil un archivo llamado "Publicar.csv"
 
 Los cambios realizados en el archivo "Publicar.csv" durante la ejecución del
 programa, serán aplicados una vez haya terminado de publicarse la última.
+
+## Formato de cada línea dentro de "Publicar.ods"
+- Cada línea será una publicación.
+- Comenzará en la columna "B" Línea 2, de forma que saltamos la primera
+puesto que son títulos
+- En la misma línea si introducimos un salto de línea funcionará como otra línea
+por ahora
