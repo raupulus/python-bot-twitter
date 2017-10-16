@@ -17,19 +17,19 @@ import time  # Importamos la libreria time --> time.sleep
 import os  # Importar lib para interactuar con el sistema
 #import random  # Genera números aleatorios --> random.randrange(1,100)
 import convert_ODS  # Importa script para convertir a CSV
-from API_TWITTER import API_TWITTER
+from perfil import perfil
 from publicacion import publicacion
 
 ##############################
 ##         Variables        ##
 ##############################
-sleep = time.sleep  # variable para usar con más comodidad el control de tiempo
+sleep = time.sleep
 PERFILES = []
 CANTIDAD_PERFILES = 0
 ENTRADAS = ''
 
 
-# Array con cada objeto perfil (clase API_TWITTER)
+# Lista con cada objeto perfil (clase perfil)
 def crear_perfiles():
     global PERFILES, CANTIDAD_PERFILES
     listar_perfiles = os.listdir("Perfiles")
@@ -40,12 +40,12 @@ def crear_perfiles():
     CONSUMER_SECRET = ''
 
     #Crear un objeto Perfil con los datos de cada subdirectorio "Perfil"
-    for perfil in listar_perfiles:
-        if ((perfil != 'Plantilla') and (perfil != 'plantilla') and
-            (perfil != 'Plantillas') and (perfil != 'plantillas')):
+    for perf in listar_perfiles:
+        if ((perf != 'Plantilla') and (perf != 'plantilla') and
+            (perf != 'Plantillas') and (perf != 'plantillas')):
 
             #Leer en "Perfiles/" + perfil + "/token.csv" los valores de API
-            tmp_token = open('./Perfiles/' + perfil + '/token.csv', 'r')
+            tmp_token = open('./Perfiles/' + perf + '/token.csv', 'r')
             for line in tmp_token:
                 line_clean = line.replace(' ', '').strip().split('=')
                 if (line_clean[0].upper() == 'ACCESS_KEY'):
@@ -61,11 +61,9 @@ def crear_perfiles():
                     print('ACCESS_KEY → ' + line_clean[1])
                     ACCESS_KEY = line_clean[1]
 
-
-            #TOFIX → Solo añade el último perfil
             #Creando objeto "perfil(id,nombre,AK,AS,CK,CS"
-            print('Creando perfil: ' + perfil + ' id-' + str(contador_id))
-            PERFILES.append(API_TWITTER(contador_id, perfil,
+            print('Creando perfil: ' + perf + ' id-' + str(contador_id))
+            PERFILES.append(perfil(contador_id, perf,
                 ACCESS_KEY, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET))
             contador_id += 1
 
@@ -73,8 +71,9 @@ def crear_perfiles():
     CANTIDAD_PERFILES = len(PERFILES)
     print('\n[+]Cantidad de perfiles → ' + str(CANTIDAD_PERFILES))
 
+
 # Crea el array de entradas para cada perfil
-#TOFIX → Plantear que esto lo haga la clase perfil (API_TWITTER)
+#TOFIX → Plantear que esto lo haga la clase perfil (perfil - API_TWITTER)
 def crear_entradas():
     print('\nPreparando entradas para cada perfil')
     global ENTRADAS
