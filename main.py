@@ -36,19 +36,35 @@ ENTRADAS = ''
 # Array con cada objeto perfil (clase API_TWITTER)
 def crear_perfiles():
     global PERFILES, CANTIDAD_PERFILES
+    listar_perfiles = os.listdir("Perfiles")
+    contador_id = 0
+
+    #Crear un objeto Perfil con los datos de cada subdirectorio "Perfil"
+    for perfil in listar_perfiles:
+        if ((perfil != 'Plantilla') and (perfil != 'plantilla') and
+            (perfil != 'Plantillas') and (perfil != 'plantillas')):
+
+            #Leer en "Perfiles/" + perfil + "/TOKEN.csv" los valores de API
+            #TODO → Extraer de TOKEN.csv los valores:
+            ACCESS_KEY = ''
+            ACCESS_SECRET = ''
+            CONSUMER_KEY = ''
+            CONSUMER_SECRET = ''
+
+            #Creando objeto "perfil(id,nombre,AK,AS,CK,CS"
+            PERFILES = [API_TWITTER(contador_id, perfil,
+                ACCESS_KEY, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)]
+            contador_id += 1
+
+    #Recuenta la cantidad total de perfiles
+    CANTIDAD_PERFILES = len(PERFILES)
+    print('\n[+]Cantidad de perfiles → ' + CANTIDAD_PERFILES)
 
 
-
-
-
-    #Comprobar cantidad de carpetas dentro de "./Perfiles"
-    #No contar → Plantillas,plantillas,Plantilla,plantilla
-    #Extraer el nombre de la carpeta y pasarlo al constructor
     #Leer archivo TOKEN.csv y pasar los parámetros al constructor
     #Aumentar contador de id en constructor
 
-    #Crear un bucle donde añadir lo siguiente
-    PERFILES = [API_TWITTER(0, "perfil1", "asd", "asd", "asd", "asd")]
+
 crear_perfiles()
 
 
