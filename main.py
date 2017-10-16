@@ -9,9 +9,6 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
-# Este script se está planteando para muchos perfiles pero se bloqueará
-# hasta llegar a un punto más avanzado a solo 1 perfil (posición 0 en array's)'
-
 ##############################
 ##    Importar Librerías    ##
 ##############################
@@ -19,10 +16,9 @@ import time  # Importamos la libreria time --> time.sleep
 #import sys  # Importar comandos del sistema, por ejemplo exit
 import os  # Importar lib para interactuar con el sistema
 #import random  # Genera números aleatorios --> random.randrange(1,100)
-import convert_ODS  # Importa de este directorio el script para convertir a CSV
+import convert_ODS  # Importa script para convertir a CSV
 from API_TWITTER import API_TWITTER
 from publicacion import publicacion
-#from VAR import *  # importar todas las variables
 
 ##############################
 ##         Variables        ##
@@ -51,6 +47,8 @@ def crear_perfiles():
             CONSUMER_KEY = ''
             CONSUMER_SECRET = ''
 
+            print('Creando el perfil → ' + perfil)
+
             #Creando objeto "perfil(id,nombre,AK,AS,CK,CS"
             PERFILES = [API_TWITTER(contador_id, perfil,
                 ACCESS_KEY, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)]
@@ -58,26 +56,18 @@ def crear_perfiles():
 
     #Recuenta la cantidad total de perfiles
     CANTIDAD_PERFILES = len(PERFILES)
-    print('\n[+]Cantidad de perfiles → ' + CANTIDAD_PERFILES)
+    print('\n[+]Cantidad de perfiles → ' + str(CANTIDAD_PERFILES))
 
 
     #Leer archivo TOKEN.csv y pasar los parámetros al constructor
     #Aumentar contador de id en constructor
 
-
-crear_perfiles()
-
-
-#Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
-def existe_archivo(ruta_archivo):
-    return os.path.isfile(ruta_archivo)  # Comprobar que existe
-
-
-#Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
-def inicializar():
-    #Llamar desde aquí a crear_perfiles()
+# Crea el array de entradas para cada perfil
+#TOFIX → Plantear que esto lo haga la clase perfil (API_TWITTER)
+def crear_entradas():
+    print('\nPreparando entradas para cada perfil')
     global ENTRADAS
-    print('\n[+]Buscando archivo → Publicar.ods')
+    print('[+]Buscando archivo → Publicar.ods')
     if existe_archivo('Publicar.ods'):
         print('[+]Utilizando el Archivo Publicar.ods')
         # Convertir ODS en CSV
@@ -92,6 +82,18 @@ def inicializar():
     if existe_archivo('Publicar.csv'):
         # Array con cada entrada. La posición coincide con posición en PERFILES
         ENTRADAS = [publicacion("Publicar.csv")]
+
+
+#Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
+def existe_archivo(ruta_archivo):
+    return os.path.isfile(ruta_archivo)  # Comprobar que existe
+
+
+#Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
+def inicializar():
+    crear_perfiles()
+    crear_entradas()
+
 inicializar()
 
 
@@ -128,7 +130,7 @@ def test0():
         print('\n[+] Entrada Publicada:\n' + ENTRADAS[0].publicacion_actual())
         ENTRADAS[0].siguiente_linea()
         sleep(5)
-#test0()
+test0()
 
 
 #Función para solo publicar cada 1h mientras se prueba funcionamiento
