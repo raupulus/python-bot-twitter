@@ -33,15 +33,15 @@ class API_TWITTER:
     ACCESS_KEY = ''
     ACCESS_SECRET = ''
 
-    def __init__(self, pos, nom, C_K, C_S, A_K, A_S):
+    def __init__(self, pos, nom, A_K, A_S, C_K, C_S):
         print('[!] Creando perfil con nombre → ' +
             str(nom) + ' en posición' + str(pos))
         self.posicion = pos
         self.nombre = nom
-        self.CONSUMER_KEY = C_K
-        self.CONSUMER_SECRET = C_S
         self.ACCESS_KEY = A_K
         self.ACCESS_SECRET = A_S
+        self.CONSUMER_KEY = C_K
+        self.CONSUMER_SECRET = C_S
 
 #Cadena a devolver cuando se convierta el objeto a STR
     def __srt__(self):
