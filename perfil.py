@@ -22,7 +22,7 @@ from time import sleep  # Importamos la libreria time --> time.sleep
 ##Función para seguir a quien me siga si cumple un patrón
 
 
-class API_TWITTER:
+class perfil:
 
     nombre = ''
     posicion = 0  # Posición en el array donde se almacena este objeto
