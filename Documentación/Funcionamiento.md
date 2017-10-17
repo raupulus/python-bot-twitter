@@ -13,3 +13,23 @@ manera que en cada uno de didchos directorios se encuentren:
 que vengan precedidos por el hastag #publicar seguido de una cadena
 - Cuando un perfil termina o más bien llega a la última publicación se comprobará
 el archivo "Publicar.ods" en busca de cambios
+
+## Configuraciones del perfil
+Listado de parámetros para establecer las condiciones individuales de cada perfil
+de esta forma se puede hacer que cada uno trabaje de forma distinta.
+
+### RETWIIT
+- RETWIIT=cadena1,cadena2,cadena...
+Indica las cadenas que se retwittearán (según el propio timeline del perfil)
+
+### HASHRETWITT
+- RETWIIT=cadena1,cadena2,cadena...
+Indica los hashtags que se retwittearán (según el propio timeline del perfil)
+
+### SEGUIR
+- SEGUIR=cadena1,cadena2,cadena3
+Son las cadenas que contendrá el nombre o la descripción para que los siga el perfil, esto se basará en los últimos seguidores que haya recibido.
+
+### TIEMPO
+- TIEMPO=(Un número en segundos)
+Este será el tiempo que tiene entre cada publicación
