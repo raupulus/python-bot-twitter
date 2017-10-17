@@ -28,7 +28,7 @@ def existe_archivo(ruta_archivo):
 
 #Función para crear un archivo CSV a partir del ODS
 #Se usará solo la columna "B" del archivo pasado (por ahora)
-def toCSV(ruta_archivo):
+def toCSV(ruta_archivo, ruta_destino):
     global columna_inicio, columna_limite
     if existe_archivo(ruta_archivo):
         #Solo extraer la columna "B" de cada hoja
@@ -38,7 +38,8 @@ def toCSV(ruta_archivo):
             column_limit=columna_limite)
 
         #Abrir archivo donde escribir
-        SALIDA_CSV = codecs.open('Publicar.csv', 'w', encoding='utf8')
+        SALIDA_CSV = codecs.open(ruta_destino + '/Publicar.csv',
+                    'w', encoding='utf8')
 
         #Pasar cada línea al archivo csv
         for lines in HOJAS:
