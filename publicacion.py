@@ -13,6 +13,7 @@
 ##    Importar Librerías    ##
 ##############################
 import os  # Importar lib para interactuar con el sistema
+import sys  # Importar comandos del sistema, por ejemplo exit
 
 
 class publicacion:
