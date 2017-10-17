@@ -23,7 +23,7 @@ de esta forma se puede hacer que cada uno trabaje de forma distinta.
 Indica las cadenas que se retwittearán (según el propio timeline del perfil)
 
 ### HASHRETWITT
-- RETWIIT=cadena1,cadena2,cadena...
+- HASHRETWITT=cadena1,cadena2,cadena...
 Indica los hashtags que se retwittearán (según el propio timeline del perfil)
 
 ### SEGUIR
