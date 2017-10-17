@@ -7,16 +7,21 @@ Es posible que requiera una porción insignificante de tiempo por encima de lo n
 
 Mediante una función se programarán publicaciones cada cierto tiempo, ajustando este valor entre las variables mínimas y máximas. La idea es que pase un tiempo distinto entre cada publicación por ejemplo mínimo 10minutos y máximo 40minutos → Esto será calculado mediante una función que devuelva el tiempo aleatoriamente.
 
-## Versión actual
+---
+
+## Versión actual 0.1 (beta)
 Actualmente está en desarrollo por lo que no se recomienda aún el uso.
 
 Se continúa trabajando sobre el bot, ya es posible twittear pero se ha de solventar manualmente ciertas cuestiones que serán corregidas en breve.
+
+---
 
 ## Obejtivos del bot
 - [x] Exportar de ODS a CSV
 - [x] Conectar con API de Twitter
 - [x] Convertir número de línea a cadena
 - [x] Publicar automáticamente todas las líneas del CSV
+- [x] Crear automáticamente multiperfiles
 - [ ] Marcar favoritos según patrones
 - [ ] Marcar favorito todo según quien comparta
 - [ ] Retwittear según patrones
@@ -41,9 +46,10 @@ Para las publicaciones se utiliza un archivo LibreCalc en formato ODS donde la c
 
 ## Estructura
 - main.py → Contiene el programa principal, todas las llamadas y funcionamiento.
-- VAR.lst → Lista de variables para el funcionamiento del programa, incluyendo token de API twitter
-- ODS_to_CSV → Transforma oja de cálculo en formato ODS de LibreOffice a CSV para trabajar más sencillo
-- API_Twitter → Incluye las funciones para interactuar con la API de twitter, capa intermediaria entre el *main.py* y el módulo *tweepy*
+- convert_ODS.py → Transforma hoja de cálculo en formato ODS de LibreOffice a CSV para trabajar más sencillo
+- perfil.py → Incluye las funciones para interactuar con la API de twitter, capa intermediaria entre el *main.py* y el módulo *tweepy*
+- publicacion.py →
+---
 
 ## Dependencias
 Aquí se listan las dependencias necesarias para el correcto funcionamiento del bot
@@ -54,6 +60,8 @@ Aquí se listan las dependencias necesarias para el correcto funcionamiento del 
     - codecs
     - tweepy
     - readline
+
+---
 
 ## Instalar dependencias en Debian 9
 ```shell
