@@ -118,16 +118,23 @@ def existe_archivo(ruta_archivo):
 #Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
 def inicializar():
     crear_perfiles()
-
 inicializar()
 
 
 # Publicar
-def publicar():
+def publicar(tiempo):
     print('[+] Preparando para publicar')
+    while True:
+        for i in range(0, CANTIDAD_PERFILES):
+            #PERFILES[i].publicar(ENTRADAS[i].publicacion_actual())
+            print('Indice del perfil → ' + str(i))
+            #print('Nombre del perfil' + str(PERFILES[i])) #TOFIX → reescribir str()
+            print('\n[+] Entrada Publicada:\n' + ENTRADAS[i].publicacion_actual())
+            ENTRADAS[i].siguiente_linea()
+            sleep(tiempo)
 
 
-# Retwittear
+#Retwittear
 def retwittear():
     print('[+] Preparando para retwittear')
 
@@ -150,12 +157,7 @@ def depurador():
 
 #Función de pruebas 1 → Muestra cada publicación sin publicarla
 def test0():
-    #TODO → CREAR BUCLE FOR PARA MOSTRAR 1 PUBLICACIÓN DE CADA PERFIL
-    #Bucle temporal para crear la cadena a publicar a partir de la línea
-    while True:
-        print('\n[+] Entrada Publicada:\n' + ENTRADAS[0].publicacion_actual())
-        ENTRADAS[0].siguiente_linea()
-        sleep(5)
+    publicar(5)
 test0()
 
 
