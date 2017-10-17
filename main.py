@@ -9,9 +9,6 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
-# Este script se está planteando para muchos perfiles pero se bloqueará
-# hasta llegar a un punto más avanzado a solo 1 perfil (posición 0 en array's)'
-
 ##############################
 ##    Importar Librerías    ##
 ##############################
@@ -19,24 +16,98 @@ import time  # Importamos la libreria time --> time.sleep
 #import sys  # Importar comandos del sistema, por ejemplo exit
 import os  # Importar lib para interactuar con el sistema
 #import random  # Genera números aleatorios --> random.randrange(1,100)
-import convert_ODS  # Importa de este directorio el script para convertir a CSV
-from API_TWITTER import API_TWITTER
+import convert_ODS  # Importa script para convertir a CSV
+from perfil import perfil
 from publicacion import publicacion
-#from VAR import *  # importar todas las variables
 
 ##############################
 ##         Variables        ##
 ##############################
-sleep = time.sleep  # variable para usar con más comodidad el control de tiempo
-PERFILES = ''
-ENTRADAS = ''
+sleep = time.sleep
+PERFILES = []
+CANTIDAD_PERFILES = 0
+ENTRADAS = []
 
 
-# Array con cada objeto perfil (clase API_TWITTER)
+# Lista con cada objeto perfil (clase perfil)
 def crear_perfiles():
-    global PERFILES
-    PERFILES = [API_TWITTER(0, "perfil1", "asd", "asd", "asd", "asd")]
-crear_perfiles()
+    global PERFILES, CANTIDAD_PERFILES
+    listar_perfiles = os.listdir("Perfiles")
+    contador_id = 0
+    ACCESS_KEY = ''
+    ACCESS_SECRET = ''
+    CONSUMER_KEY = ''
+    CONSUMER_SECRET = ''
+
+    #Crear un objeto Perfil con los datos de cada subdirectorio "Perfil"
+    for perf in listar_perfiles:
+        if ((perf != 'Plantilla') and (perf != 'plantilla') and
+            (perf != 'Plantillas') and (perf != 'plantillas')):
+
+            #Leer en "Perfiles/" + perfil + "/token.csv" los valores de API
+            tmp_token = open('./Perfiles/' + perf + '/token.csv', 'r')
+            for line in tmp_token:
+                line_clean = line.replace(' ', '').strip().split('=')
+                if (line_clean[0].upper() == 'ACCESS_KEY'):
+                    print('ACCESS_KEY → ' + line_clean[1])
+                    ACCESS_KEY = line_clean[1]
+                elif (line_clean[0].upper() == 'ACCESS_SECRET'):
+                    print('ACCESS_SECRET → ' + line_clean[1])
+                    ACCESS_SECRET = line_clean[1]
+                elif (line_clean[0].upper() == 'CONSUMER_KEY'):
+                    print('CONSUMER_KEY → ' + line_clean[1])
+                    CONSUMER_KEY = line_clean[1]
+                elif (line_clean[0].upper() == 'CONSUMER_SECRET'):
+                    print('CONSUMER_SECRET → ' + line_clean[1])
+                    CONSUMER_SECRET = line_clean[1]
+
+            #Creando entradas para este perfil, se pasa la ruta hacia perfil
+            #TODO → Si la siguiente función devuelve false no crear perfil
+            #en ese caso sería que no hay entradas¿?¿?
+            crear_entradas('./Perfiles/' + perf)
+
+            #Creando objeto "perfil(id,nombre,AK,AS,CK,CS"
+            print('Creando perfil: ' + perf + ' id-' + str(contador_id))
+            PERFILES.append(perfil(contador_id, perf,
+                ACCESS_KEY, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET))
+            contador_id += 1
+
+    #TEMPORAL
+    print('\n[+] Cantidad de entradas → ' + str(len(ENTRADAS)))
+
+    #Recuenta la cantidad total de perfiles
+    CANTIDAD_PERFILES = len(PERFILES)
+    print('\n[+] Cantidad de perfiles → ' + str(CANTIDAD_PERFILES))
+
+
+# Crea el array de entradas para cada perfil
+#TOFIX → Plantear que esto lo haga la clase perfil (perfil - API_TWITTER)
+def crear_entradas(ruta_perfil):
+    global ENTRADAS
+    print('[+] Buscando archivo → ' + ruta_perfil + '/Publicar.ods')
+
+    #TODO → Eliminar entrada y perfil del array principal si no hay CSV
+
+    if existe_archivo(ruta_perfil + '/Publicar.ods'):
+        print('[+] Utilizando el Archivo Publicar.ods')
+        convert_ODS.toCSV(ruta_perfil + '/Publicar.ods', ruta_perfil)
+    elif existe_archivo(ruta_perfil + '/publicar.ods'):
+        print('[+] Utilizando el Archivo publicar.ods')
+        convert_ODS.toCSV(ruta_perfil + '/publicar.ods', ruta_perfil)
+    else:
+        print('[~] No encontrado ningún archivo publicar.ods ni Publicar.ods')
+
+    #Se comprueba que el CSV se ha creado antes de intentar crear objetos
+    # Array con cada entrada. La posición coincide con posición en PERFILES
+    if existe_archivo(ruta_perfil + '/Publicar.csv'):
+        ENTRADAS.append(publicacion(ruta_perfil + '/Publicar.csv'))
+        #return True
+    elif existe_archivo(ruta_perfil + '/publicar.csv'):
+        ENTRADAS.append(publicacion(ruta_perfil + '/publicar.csv'))
+        #return True
+    else:
+        print('[-] No se encuentra el archivo CSV para este perfil')
+        #return False
 
 
 #Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
@@ -46,35 +117,29 @@ def existe_archivo(ruta_archivo):
 
 #Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
 def inicializar():
-    #Llamar desde aquí a crear_perfiles()
-    global ENTRADAS
-    print('\n[+]Buscando archivo → Publicar.ods')
-    if existe_archivo('Publicar.ods'):
-        print('[+]Utilizando el Archivo Publicar.ods')
-        # Convertir ODS en CSV
-        convert_ODS.toCSV("Publicar.ods")
-    # TOFIX → Si no existe Publicar.ods se almacena en "ARCHIVO_ENTRADA"
-    # pero no es del todo claro. Plantear dar aviso e ignorar perfil y publicns
-    #else:
-    #    print('[~]Archivo Publicar.ods no encontrado')
-    #    ARCHIVO_ENTRADA = raw_input('Ruta completa hasta el archivo: ')
-
-    #Se comprueba que el CSV se ha creado antes de intentar crear objetos
-    if existe_archivo('Publicar.csv'):
-        # Array con cada entrada. La posición coincide con posición en PERFILES
-        ENTRADAS = [publicacion("Publicar.csv")]
+    crear_perfiles()
 inicializar()
 
 
 # Publicar
-def publicar():
+def publicar(tiempo):
     print('[+] Preparando para publicar')
+    while True:
+        for i in range(0, CANTIDAD_PERFILES):
+            #PERFILES[i].publicar(ENTRADAS[i].publicacion_actual())
+            print('Indice del perfil → ' + str(i))
+            #print('Nombre del perfil' + str(PERFILES[i])) #TOFIX → reescribir str()
+            print('\n[+] Entrada Publicada:\n' + ENTRADAS[i].publicacion_actual())
+            ENTRADAS[i].siguiente_linea()
+            sleep(tiempo)
 
 
-# Retwittear
+#Retwittear
 def retwittear():
     print('[+] Preparando para retwittear')
-
+    while True:
+        for i in range(0, CANTIDAD_PERFILES):
+            PERFILES[i].retwittear()
 
 # Seguir
 def seguir():
@@ -94,11 +159,7 @@ def depurador():
 
 #Función de pruebas 1 → Muestra cada publicación sin publicarla
 def test0():
-    #Bucle temporal para crear la cadena a publicar a partir de la línea
-    while True:
-        print('\n[+] Entrada Publicada:\n' + ENTRADAS[0].publicacion_actual())
-        ENTRADAS[0].siguiente_linea()
-        sleep(5)
+    publicar(5)
 test0()
 
 
@@ -125,6 +186,13 @@ def test3():
     print('Conectando API')
     print('Obteniendo timeline')
     print('Pasándolo al archivo XXXX')
+#test3
+
+
+#
+def test4():
+    print('test')
+
 #test3
 
 #Preparando para cerrar script → print('\n[+]Cerrando Script')
