@@ -137,7 +137,9 @@ def publicar(tiempo):
 #Retwittear
 def retwittear():
     print('[+] Preparando para retwittear')
-
+    while True:
+        for i in range(0, CANTIDAD_PERFILES):
+            PERFILES[i].retwittear()
 
 # Seguir
 def seguir():
