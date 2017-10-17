@@ -34,8 +34,8 @@ class perfil:
     ACCESS_SECRET = ''
 
     def __init__(self, pos, nom, A_K, A_S, C_K, C_S):
-        print('[!] Creando perfil con nombre → ' +
-            str(nom) + ' en posición' + str(pos))
+        #print('[!] Creando perfil con nombre → ' +
+        #    str(nom) + ' en posición' + str(pos))
         self.posicion = pos
         self.nombre = nom
         self.ACCESS_KEY = A_K
