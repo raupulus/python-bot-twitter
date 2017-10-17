@@ -52,14 +52,14 @@ def crear_perfiles():
                     print('ACCESS_KEY → ' + line_clean[1])
                     ACCESS_KEY = line_clean[1]
                 elif (line_clean[0].upper() == 'ACCESS_SECRET'):
-                    print('ACCESS_KEY → ' + line_clean[1])
-                    ACCESS_KEY = line_clean[1]
+                    print('ACCESS_SECRET → ' + line_clean[1])
+                    ACCESS_SECRET = line_clean[1]
                 elif (line_clean[0].upper() == 'CONSUMER_KEY'):
-                    print('ACCESS_KEY → ' + line_clean[1])
-                    ACCESS_KEY = line_clean[1]
+                    print('CONSUMER_KEY → ' + line_clean[1])
+                    CONSUMER_KEY = line_clean[1]
                 elif (line_clean[0].upper() == 'CONSUMER_SECRET'):
-                    print('ACCESS_KEY → ' + line_clean[1])
-                    ACCESS_KEY = line_clean[1]
+                    print('CONSUMER_SECRET → ' + line_clean[1])
+                    CONSUMER_SECRET = line_clean[1]
 
             #Creando entradas para este perfil, se pasa la ruta hacia perfil
             #TODO → Si la siguiente función devuelve false no crear perfil
