@@ -26,7 +26,7 @@ from publicacion import publicacion
 sleep = time.sleep
 PERFILES = []
 CANTIDAD_PERFILES = 0
-ENTRADAS = ''
+ENTRADAS = []
 
 
 # Lista con cada objeto perfil (clase perfil)
@@ -61,37 +61,53 @@ def crear_perfiles():
                     print('ACCESS_KEY → ' + line_clean[1])
                     ACCESS_KEY = line_clean[1]
 
+            #Creando entradas para este perfil, se pasa la ruta hacia perfil
+            #TODO → Si la siguiente función devuelve false no crear perfil
+            #en ese caso sería que no hay entradas¿?¿?
+            crear_entradas('./Perfiles/' + perf)
+
             #Creando objeto "perfil(id,nombre,AK,AS,CK,CS"
             print('Creando perfil: ' + perf + ' id-' + str(contador_id))
             PERFILES.append(perfil(contador_id, perf,
                 ACCESS_KEY, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET))
             contador_id += 1
 
+    #TEMPORAL
+    print('\n[+] Cantidad de entradas → ' + str(len(ENTRADAS)))
+
     #Recuenta la cantidad total de perfiles
     CANTIDAD_PERFILES = len(PERFILES)
-    print('\n[+]Cantidad de perfiles → ' + str(CANTIDAD_PERFILES))
+    print('\n[+] Cantidad de perfiles → ' + str(CANTIDAD_PERFILES))
 
 
 # Crea el array de entradas para cada perfil
 #TOFIX → Plantear que esto lo haga la clase perfil (perfil - API_TWITTER)
-def crear_entradas():
-    print('\nPreparando entradas para cada perfil')
+def crear_entradas(ruta_perfil):
     global ENTRADAS
-    print('[+]Buscando archivo → Publicar.ods')
-    if existe_archivo('Publicar.ods'):
-        print('[+]Utilizando el Archivo Publicar.ods')
-        # Convertir ODS en CSV
-        convert_ODS.toCSV("Publicar.ods")
-    # TOFIX → Si no existe Publicar.ods se almacena en "ARCHIVO_ENTRADA"
-    # pero no es del todo claro. Plantear dar aviso e ignorar perfil y publicns
-    #else:
-    #    print('[~]Archivo Publicar.ods no encontrado')
-    #    ARCHIVO_ENTRADA = raw_input('Ruta completa hasta el archivo: ')
+    print('[+] Buscando archivo → ' + ruta_perfil + '/Publicar.ods')
+
+    #TODO → Eliminar entrada y perfil del array principal si no hay CSV
+
+    if existe_archivo(ruta_perfil + '/Publicar.ods'):
+        print('[+] Utilizando el Archivo Publicar.ods')
+        convert_ODS.toCSV(ruta_perfil + '/Publicar.ods', ruta_perfil)
+    elif existe_archivo(ruta_perfil + '/publicar.ods'):
+        print('[+] Utilizando el Archivo publicar.ods')
+        convert_ODS.toCSV(ruta_perfil + '/publicar.ods', ruta_perfil)
+    else:
+        print('[~] No encontrado ningún archivo publicar.ods ni Publicar.ods')
 
     #Se comprueba que el CSV se ha creado antes de intentar crear objetos
-    if existe_archivo('Publicar.csv'):
-        # Array con cada entrada. La posición coincide con posición en PERFILES
-        ENTRADAS = [publicacion("Publicar.csv")]
+    # Array con cada entrada. La posición coincide con posición en PERFILES
+    if existe_archivo(ruta_perfil + '/Publicar.csv'):
+        ENTRADAS.append(publicacion(ruta_perfil + '/Publicar.csv'))
+        #return True
+    elif existe_archivo(ruta_perfil + '/publicar.csv'):
+        ENTRADAS.append(publicacion(ruta_perfil + '/publicar.csv'))
+        #return True
+    else:
+        print('[-] No se encuentra el archivo CSV para este perfil')
+        #return False
 
 
 #Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
@@ -102,7 +118,6 @@ def existe_archivo(ruta_archivo):
 #Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
 def inicializar():
     crear_perfiles()
-    crear_entradas()
 
 inicializar()
 
@@ -135,6 +150,7 @@ def depurador():
 
 #Función de pruebas 1 → Muestra cada publicación sin publicarla
 def test0():
+    #TODO → CREAR BUCLE FOR PARA MOSTRAR 1 PUBLICACIÓN DE CADA PERFIL
     #Bucle temporal para crear la cadena a publicar a partir de la línea
     while True:
         print('\n[+] Entrada Publicada:\n' + ENTRADAS[0].publicacion_actual())
