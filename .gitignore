@@ -1,6 +1,7 @@
 /pruebas.py
 *.pyc
-*.csv
+/Publicar.csv
+/publicar.csv
 *.nja
 *.autosave
 /Perfiles/tmp_*
