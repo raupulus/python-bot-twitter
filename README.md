@@ -48,7 +48,7 @@ Para las publicaciones se utiliza un archivo LibreCalc en formato ODS donde la c
 - main.py → Contiene el programa principal, todas las llamadas y funcionamiento.
 - convert_ODS.py → Transforma hoja de cálculo en formato ODS de LibreOffice a CSV para trabajar más sencillo
 - perfil.py → Incluye las funciones para interactuar con la API de twitter, capa intermediaria entre el *main.py* y el módulo *tweepy*
-- publicacion.py →
+- publicacion.py → Contiene una clase "perfil" con la que crear un perfil por cada proyecto, de forma independiente
 ---
 
 ## Dependencias
