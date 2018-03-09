@@ -89,7 +89,7 @@ class perfil:
     def leer_timeline(self):
         public_tweets = self.API.home_timeline(50)
         for tweet in public_tweets:
-            print "[+] %s" % tweet.text
+            print("[+] %s" % tweet.text)
 
 #Seguir a quien me sigue y cumple unos patrones
 #(Solo compruebo los 10 últimos seguidores)
@@ -108,8 +108,8 @@ class perfil:
         for usuario in usuarios:
             user = self.API.get_user(usuario)
             #TOFIX → Estos datos se guardarán en CVS o BD
-            print "Nombre público o Nick → " + user.screen_name
-            print "Cantidad de seguidores → " + user.followers_count
-            print " <<<<< LISTA DE AMIGOS >>>>>"
+            print("Nombre público o Nick → " + user.screen_name)
+            print("Cantidad de seguidores → " + user.followers_count)
+            print(" <<<<< LISTA DE AMIGOS >>>>>")
             for friend in user.friends():
-                print friend.screen_name
+                print(friend.screen_name)

@@ -17,8 +17,8 @@ import time  # Importamos la libreria time --> time.sleep
 import os  # Importar lib para interactuar con el sistema
 #import random  # Genera números aleatorios --> random.randrange(1,100)
 import convert_ODS  # Importa script para convertir a CSV
-from perfil import perfil
-from publicacion import publicacion
+from Perfil import perfil
+from Publicacion import publicacion
 
 ##############################
 ##         Variables        ##
