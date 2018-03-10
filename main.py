@@ -89,7 +89,7 @@ def depurador():
 #Función de pruebas 1 → Muestra cada publicación sin publicarla
 def test0():
     publicar(5)
-test0()
+#test0()
 
 
 #Función para solo publicar cada 1h mientras se prueba funcionamiento
@@ -105,7 +105,7 @@ def test2():
     while True:
         print('\n[+] Entrada Publicada:\n' + PERFILES[0].publicar())
         sleep(21600)  # 6 Horas entre publicaciones
-#test2
+#test2()
 
 
 #Obtiene el timeline agregándolo a un archivo
@@ -113,13 +113,16 @@ def test3():
     print('Conectando API')
     print('Obteniendo timeline')
     print('Pasándolo al archivo XXXX')
-#test3
+#test3()
 
 
-#
+#Muestra los últimos 50 elementos del timeline y publica solo 1 entrada
 def test4():
-    print('test')
+    print('Estoy realizando una prueba')
+    PERFILES[0].conectar()
+    PERFILES[0].publicar()
+    #PERFILES[0].leer_timeline()
 
-#test3
+test4()
 
 #Preparando para cerrar script → print('\n[+]Cerrando Script')

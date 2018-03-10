@@ -13,7 +13,7 @@ class Token:
     def __init__(self, ruta):
         archivo_token = ruta + '/token.csv'
 
-        # Leer en "Perfiles/" + perfil + "/token.csv" los valores de API
+        #Leer token desde la ruta pasada
         tmp_token = open(archivo_token, 'r')
         for line in tmp_token:
             line_clean = line.replace(' ', '').strip().split('=')

@@ -72,6 +72,7 @@ class Perfil:
                     self.ACCESS_KEY,
                     self.ACCESS_SECRET)
                 self.API = tweepy.API(autenticar)
+                break
             except:
                 tmp = tmp + 1
                 print('[-]No se ha conectado a la API, reintento → ', tmp)
@@ -89,7 +90,7 @@ class Perfil:
         try:
             linea_actual = self.ENTRADAS.LINEA_ACTUAL
             publicacion = self.ENTRADAS.ARRAY_ENTRADAS[linea_actual]
-            #self.API.update_status(status=publicacion)
+            self.API.update_status(status=publicacion)
             print("[+] Tweet: " + publicacion)
             return True
         except:
@@ -97,6 +98,7 @@ class Perfil:
             return False
 
 #Función para Leer en el timeline las 50 publicaciones últimas
+#Al leer timeline también trae información como retweets y like..
     def leer_timeline(self):
         public_tweets = self.API.home_timeline(50)
         for tweet in public_tweets:
