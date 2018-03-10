@@ -12,7 +12,7 @@
 ##############################
 ##    Importar Librerías    ##
 ##############################
-import time  #Importamos la libreria time --> time.sleep
+from time import sleep  # Importamos la libreria time --> time.sleep
 #import sys  #Importar comandos del sistema, por ejemplo exit
 import os  #Importar lib para interactuar con el sistema
 #import random  #Genera números aleatorios --> random.randrange(1,100)
@@ -21,7 +21,6 @@ from Perfil import Perfil
 ##############################
 ##         Variables        ##
 ##############################
-sleep = time.sleep
 PERFILES = []  #Todos los perfiles instanciados
 CANTIDAD_PERFILES = 0
 
@@ -119,8 +118,8 @@ def test3():
 #Muestra los últimos 50 elementos del timeline y publica solo 1 entrada
 def test4():
     print('Estoy realizando una prueba')
-    PERFILES[0].conectar()
-    PERFILES[0].publicar()
+    #PERFILES[0].conectar()
+    #PERFILES[0].publicar()
     #PERFILES[0].leer_timeline()
 
 test4()

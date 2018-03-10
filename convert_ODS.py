@@ -9,47 +9,77 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
-#Esto es una librería de funciones que ayuda a cambiar entre formatos archivos
-#de entrada, principalmente de ODS a CSV
+# Esto es una librería de funciones que ayuda a cambiar entre formatos archivos
+# de entrada, principalmente de ODS a CSV
 
 import pyexcel as pe
-import codecs  #Librería para codificar en UTF-8 (Error al write ñ)
-import os  #Importar lib para interactuar con el sistema
+import codecs  # Librería para codificar en UTF-8 (Error al write ñ)
+import os  # Importar lib para interactuar con el sistema
 
 
-columna_inicio = 1  # Empieza en columna B
-columna_limite = 1  # Solo lee 1 columna
-
-
-#Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
+# Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
 def existe_archivo(ruta_archivo):
     return os.path.isfile(ruta_archivo)  # Comprobar que existe
 
-
-#Función para crear un archivo CSV a partir del ODS
-#Se usará solo la columna "B" del archivo pasado (por ahora)
+# Función para crear un archivo CSV a partir del ODS
 def toCSV(ruta_archivo, ruta_destino):
-    global columna_inicio, columna_limite
+    columna_inicio = 0  # Empieza en columna A (TITULO;TWITT;LINK)
+    columna_limite = 3  # Solo lee 3 columnas
+
     if existe_archivo(ruta_archivo):
-        #Solo extraer la columna "B" de cada hoja
-        HOJAS = pe.get_book(
+        book = pe.get_book(
             file_name=ruta_archivo,
             start_column=columna_inicio,
-            column_limit=columna_limite)
+            column_limit=columna_limite,
+            start_row=1
+        )
 
-        #Abrir archivo donde escribir
+        # Abrir archivo donde escribir
         SALIDA_CSV = codecs.open(ruta_destino + '/Publicar.csv',
-                    'w', encoding='utf8')
+                     'w', encoding='utf8')
 
-        #Pasar cada línea al archivo csv
-        for lines in HOJAS:
-            for line in lines:
-                # Debe tener más de 20 carácteres y menos de 140
-                if ((len(line[0]) > 20) and (len(line[0]) <= 140)):
-                    SALIDA_CSV.write(line[0].strip() + '\n')
+        for sheet in book:
+            for line in sheet:
+                try:
+                    titulo = line[0]
+                    entrada = line[1]
+
+                    if len(line) == 2:
+                        enlace = ''
+                    else:
+                        enlace = line[2]
+
+                    #print(enlace)
+
+                    todo = titulo + entrada + enlace
+
+                    # Debe tener más de 20 carácteres y menos de 280 el conjunto
+                    if ((len(todo) > 20) and (len(todo) <= 280)):
+                        SALIDA_CSV.write(
+                            titulo.strip() + ';' +
+                            entrada.strip() + ';' +
+                            enlace.strip() + ';' +
+                            '\n'
+                        )
+                except:
+                    print('Hay una línea mal formada o sin datos')
 
         print('\n[+]Cerrando Script')
         SALIDA_CSV.close()
+
+        # Abrir archivo donde escribir
+        # SALIDA_CSV = codecs.open(ruta_destino + '/Publicar.csv',
+        #             'w', encoding='utf8')
+
+        # Pasar cada línea al archivo csv
+        # for lines in HOJAS:
+        #     for line in lines:
+        #         # Debe tener más de 20 carácteres y menos de 140
+        #         if ((len(line[0]) > 20) and (len(line[0]) <= 280)):
+        #             SALIDA_CSV.write(line[0].strip() + '\n')
+        #
+        # print('\n[+]Cerrando Script')
+        # SALIDA_CSV.close()
 
         return True
     else:
