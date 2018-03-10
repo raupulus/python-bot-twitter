@@ -76,8 +76,9 @@ class Perfil:
         # Se comprueba que el CSV se ha creado antes de intentar crear objetos
         if self.existe_archivo(ruta_entradas_csv):
             self.ENTRADAS = Publicacion(ruta_entradas_csv)
-            print('\n[+] Cantidad de entradas → ' + str(
-                self.ENTRADAS.TOTAL_LINEAS))
+            print('\n[+] Cantidad de entradas → ' +
+                  str(self.ENTRADAS.TOTAL_LINEAS)
+            )
             return True
         else:
             print('[-] No se encuentra el archivo CSV para este perfil')
@@ -101,16 +102,20 @@ class Perfil:
         except:
             print('[-]No se ha conectado a la API de twitter')
 
-# Función para Publicar en Twitter (Recibe una cadena de 1 sola línea a
-    # publicar)
+# Función para Publicar en Twitter
     def publicar(self):
-        self.total_publicado += 1
         print("[+] Twitteando la siguiente entrada...")
         try:
             linea_actual = self.ENTRADAS.LINEA_ACTUAL
-            publicacion = self.ENTRADAS.ARRAY_ENTRADAS[linea_actual]
-            #self.API.update_status(status=publicacion)
+            fila_actual = self.ENTRADAS.ARRAY_ENTRADAS[linea_actual]
+            publicacion = fila_actual[0] + '\n' + \
+                          fila_actual[1] + '\n' + \
+                          fila_actual[2]
+
+            self.API.update_status(status=publicacion)
+
             print("[+] Tweet: " + publicacion)
+            self.total_publicado += 1
             print("[+] Se han publicado en total: " + str(self.total_publicado))
             return True
         except:

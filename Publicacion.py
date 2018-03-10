@@ -14,13 +14,14 @@
 ##############################
 import os  # Importar lib para interactuar con el sistema
 import sys  # Importar comandos del sistema, por ejemplo exit
+import csv
 
 
 class Publicacion:
     LINEA_ACTUAL = 0
     TOTAL_LINEAS = 0
-    documento_abierto = ''
-    ARRAY_ENTRADAS = ''  # Contiene las entradas divididas en líneas
+    #documento_abierto = ''
+    ARRAY_ENTRADAS = []  # Contiene las entradas divididas en líneas
 
     def __init__(self, archivo_publicaciones):
         print('[+] Creando Objeto de publicación')
@@ -47,13 +48,19 @@ class Publicacion:
     def leerCSV(self, archivo_publicaciones):
         print('\n[+]Abriendo el archivo Publicar.csv')
         try:
-            self.documento_abierto = open(archivo_publicaciones, 'r')
-            self.ARRAY_ENTRADAS = self.documento_abierto.read().splitlines()
+            #self.documento_abierto = open(archivo_publicaciones, 'r')
+            #self.ARRAY_ENTRADAS = self.documento_abierto.read().splitlines()
+
+            #
+            with open(archivo_publicaciones) as documento_abierto:
+                archivo = csv.reader(documento_abierto, delimiter=';')
+                print(archivo_publicaciones)
+                for row in archivo:  # Cada columna de la lista
+                    self.ARRAY_ENTRADAS.append(row)
+            print('[+]Archivo Publicar.csv abierto en modo LECTURA')
         except:
             print('[-]Error al abrir Publicar.csv')
             print('[!]Comprueba que existe y tienes permisos de lectura')
-            sys.exit(0)
-        print('[+]Archivo Publicar.csv abierto en modo LECTURA')
 
     # Función para contar el total de líneas en el archivo CSV
     def contar_lineas(self):

@@ -49,8 +49,6 @@ def toCSV(ruta_archivo, ruta_destino):
                     else:
                         enlace = line[2]
 
-                    #print(enlace)
-
                     todo = titulo + entrada + enlace
 
                     # Debe tener más de 20 carácteres y menos de 280 el conjunto

@@ -118,8 +118,8 @@ def test3():
 #Muestra los últimos 50 elementos del timeline y publica solo 1 entrada
 def test4():
     print('Estoy realizando una prueba')
-    #PERFILES[0].conectar()
-    #PERFILES[0].publicar()
+    PERFILES[0].conectar()
+    PERFILES[0].publicar()
     #PERFILES[0].leer_timeline()
 
 test4()
