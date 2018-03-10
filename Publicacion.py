@@ -42,6 +42,7 @@ class Publicacion:
         else:
             print('[-]El archivo Publicar.csv NO EXISTE, revísalo')
             sys.exit(0)  # Salir del script
+            #return false
 
     #Abrir CSV en solo lectura para poder publicar
     def leerCSV(self, archivo_publicaciones):
@@ -51,7 +52,7 @@ class Publicacion:
             self.ARRAY_ENTRADAS = self.documento_abierto.read().splitlines()
         except:
             print('[-]Error al abrir Publicar.csv')
-            print('[-]Comprueba que existe y tienes permisos de lectura')
+            print('[!]Comprueba que existe y tienes permisos de lectura')
             sys.exit(0)
         print('[+]Archivo Publicar.csv abierto en modo LECTURA')
 
@@ -62,21 +63,19 @@ class Publicacion:
             self.TOTAL_LINEAS = len(self.ARRAY_ENTRADAS)
         except:
             print('[-]Error al abrir Publicar.csv')
-            print('[-]Comprueba que existe y tienes permisos de lectura')
+            print('[!]Comprueba que existe y tienes permisos de lectura')
             sys.exit(0)
         print('[+]Total de líneas → ' + str(self.TOTAL_LINEAS))
 
 #Comprobar línea que se le pasa
     def comprobar_linea(self, linea):
-        #print('[!] Comprobando línea recibida')
-        if ((len(linea) >= 20) and (len(linea) <= 140)):
+        if ((len(linea) >= 20) and (len(linea) <= 280)):
             return True
         else:
             return False
 
 #Comprueba la validez de la próxima línea y se posiciona sobre ella
     def siguiente_linea(self):
-        #print('[!] Cambiando a la línea → ' + str(self.LINEA_ACTUAL + 1))
         linea_incorrecta = False
         if not self.comprobar_linea(self.ARRAY_ENTRADAS[self.LINEA_ACTUAL]):
             linea_incorrecta = True
