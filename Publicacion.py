@@ -16,7 +16,7 @@ import os  # Importar lib para interactuar con el sistema
 import sys  # Importar comandos del sistema, por ejemplo exit
 
 
-class publicacion:
+class Publicacion:
 
     LINEA_ACTUAL = 0
     TOTAL_LINEAS = 0
