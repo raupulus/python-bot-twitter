@@ -33,6 +33,7 @@ class Perfil:
     posicion = 0  #Posición en el array donde se almacena este objeto
     API = ''
     ENTRADAS = ''  #Objeto Publicación con las entradas
+    total_publicado = 0  #Publicaciones totales de este perfil
 
     def __init__(self, pos, nom):
         self.posicion = pos
@@ -85,13 +86,14 @@ class Perfil:
 
 #Función para Publicar en Twitter (Recibe una cadena de 1 sola línea a publicar)
     def publicar(self):
-        #self.conectar()
+        self.total_publicado += 1
         print("[+] Twitteando la siguiente entrada...")
         try:
             linea_actual = self.ENTRADAS.LINEA_ACTUAL
             publicacion = self.ENTRADAS.ARRAY_ENTRADAS[linea_actual]
             self.API.update_status(status=publicacion)
             print("[+] Tweet: " + publicacion)
+            print("[+] Se han publicado en total: " + str(self.total_publicado))
             return True
         except:
             print("[-] No se ha logrado publicar")
