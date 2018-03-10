@@ -64,12 +64,15 @@ Aquí se listan las dependencias necesarias para el correcto funcionamiento del 
 ---
 
 ## Instalar dependencias en Debian 9
-```shell
-sudo apt install git python python-pip
-```
 
 ```shell
-pip install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs twitter tweepy readline
+    sudo apt install git python3 python3-pip
+```
+
+## Instalar dependencias de Python 3
+```shell
+    pip3 install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs twitter tweepy
+     readline
 ```
 ---
 

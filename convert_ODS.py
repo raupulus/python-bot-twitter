@@ -13,8 +13,8 @@
 #de entrada, principalmente de ODS a CSV
 
 import pyexcel as pe
-import codecs  # Librería para codificar en UTF-8 (Error al write ñ)
-import os  # Importar lib para interactuar con el sistema
+import codecs  #Librería para codificar en UTF-8 (Error al write ñ)
+import os  #Importar lib para interactuar con el sistema
 
 
 columna_inicio = 1  # Empieza en columna B

@@ -16,7 +16,7 @@ import os  # Importar lib para interactuar con el sistema
 import sys  # Importar comandos del sistema, por ejemplo exit
 
 
-class publicacion:
+class Publicacion:
 
     LINEA_ACTUAL = 0
     TOTAL_LINEAS = 0
@@ -96,4 +96,9 @@ class publicacion:
 
     #Devuelve una cadena con la línea a publicar
     def publicacion_actual(self):
-        return str(self.ARRAY_ENTRADAS[self.LINEA_ACTUAL])
+        try:
+            linea = str(self.ARRAY_ENTRADAS[self.LINEA_ACTUAL])
+            return linea;
+        except:
+            print("No tiene líneas el documento")
+            return False
