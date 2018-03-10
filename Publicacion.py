@@ -14,14 +14,12 @@
 ##############################
 import os  # Importar lib para interactuar con el sistema
 import sys  # Importar comandos del sistema, por ejemplo exit
-
+import csv  # Importar comandos para trabajar con formato csv
 
 class Publicacion:
-
     LINEA_ACTUAL = 0
     TOTAL_LINEAS = 0
-    documento_abierto = ''
-    ARRAY_ENTRADAS = ''  # Contiene las entradas divididas en líneas
+    ARRAY_ENTRADAS = []  # Contiene las entradas divididas en líneas
 
     def __init__(self, archivo_publicaciones):
         print('[+] Creando Objeto de publicación')
@@ -30,53 +28,54 @@ class Publicacion:
         self.leerCSV(archivo_publicaciones)
         self.contar_lineas()
 
-#Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
+# Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
     def existe_archivo(self, archivo_publicaciones):
-        return os.path.isfile(archivo_publicaciones)  # Comprobar que existe
+        return os.path.isfile(archivo_publicaciones)  #Comprobar que existe
 
-#Comprobar archivo, mejorar esta parte para que se
+# Comprobar archivo, mejorar esta parte para que se
     def comprobarCSV(self, archivo_publicaciones):
         print('\n[+]Comprobando que existe el archivo Publicar.csv')
         if self.existe_archivo(archivo_publicaciones):
             print('[+]El archivo Publicar.csv existe')
+            return True
         else:
             print('[-]El archivo Publicar.csv NO EXISTE, revísalo')
-            sys.exit(0)  # Salir del script
+            return False
 
-    #Abrir CSV en solo lectura para poder publicar
+    # Abrir CSV en solo lectura para poder publicar
     def leerCSV(self, archivo_publicaciones):
         print('\n[+]Abriendo el archivo Publicar.csv')
         try:
-            self.documento_abierto = open(archivo_publicaciones, 'r')
-            self.ARRAY_ENTRADAS = self.documento_abierto.read().splitlines()
+            with open(archivo_publicaciones) as documento_abierto:
+                archivo = csv.reader(documento_abierto, delimiter=';')
+                print(archivo_publicaciones)
+                for row in archivo:  # Cada columna de la lista
+                    self.ARRAY_ENTRADAS.append(row)
+            print('[+]Archivo Publicar.csv abierto en modo LECTURA')
         except:
             print('[-]Error al abrir Publicar.csv')
-            print('[-]Comprueba que existe y tienes permisos de lectura')
-            sys.exit(0)
-        print('[+]Archivo Publicar.csv abierto en modo LECTURA')
+            print('[!]Comprueba que existe y tienes permisos de lectura')
 
-    #Función para contar el total de líneas en el archivo CSV
+    # Función para contar el total de líneas en el archivo CSV
     def contar_lineas(self):
         print('\n[+]Contando líneas en Publicar.csv')
         try:
             self.TOTAL_LINEAS = len(self.ARRAY_ENTRADAS)
         except:
             print('[-]Error al abrir Publicar.csv')
-            print('[-]Comprueba que existe y tienes permisos de lectura')
+            print('[!]Comprueba que existe y tienes permisos de lectura')
             sys.exit(0)
         print('[+]Total de líneas → ' + str(self.TOTAL_LINEAS))
 
-#Comprobar línea que se le pasa
+# Comprobar línea que se le pasa
     def comprobar_linea(self, linea):
-        #print('[!] Comprobando línea recibida')
-        if ((len(linea) >= 20) and (len(linea) <= 140)):
+        if ((len(linea) >= 10) and (len(linea) <= 280)):
             return True
         else:
             return False
 
-#Comprueba la validez de la próxima línea y se posiciona sobre ella
+# Comprueba la validez de la próxima línea y se posiciona sobre ella
     def siguiente_linea(self):
-        #print('[!] Cambiando a la línea → ' + str(self.LINEA_ACTUAL + 1))
         linea_incorrecta = False
         if not self.comprobar_linea(self.ARRAY_ENTRADAS[self.LINEA_ACTUAL]):
             linea_incorrecta = True
@@ -94,11 +93,11 @@ class Publicacion:
         else:
             self.LINEA_ACTUAL = 0
 
-    #Devuelve una cadena con la línea a publicar
+    # Devuelve una cadena con la línea a publicar
     def publicacion_actual(self):
         try:
             linea = str(self.ARRAY_ENTRADAS[self.LINEA_ACTUAL])
-            return linea;
+            return linea
         except:
             print("No tiene líneas el documento")
             return False

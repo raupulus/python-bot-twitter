@@ -13,10 +13,7 @@
 ##    Importar Librerías    ##
 ##############################
 import tweepy  # Librería para facilitar uso de API de twitter
-from time import sleep  # Importamos la libreria time --> time.sleep
-
-import os  #Importar lib para interactuar con el sistema
-
+import os  # Importar lib para interactuar con el sistema
 import convert_ODS  #Importa script para convertir a CSV
 from Token import Token
 from Publicacion import Publicacion
@@ -29,11 +26,12 @@ from Publicacion import Publicacion
 
 
 class Perfil:
+    VALIDA = False  # Comprueba si el perfil es válido
 
-    posicion = 0  #Posición en el array donde se almacena este objeto
+    posicion = 0  # Posición en el array donde se almacena este objeto
     API = ''
-    ENTRADAS = ''  #Objeto Publicación con las entradas
-    total_publicado = 0  #Publicaciones totales de este perfil
+    ENTRADAS = ''  # Objeto Publicación con las entradas
+    total_publicado = 0  # Publicaciones totales de este perfil
 
     def __init__(self, pos, nom):
         self.posicion = pos
@@ -48,78 +46,102 @@ class Perfil:
         self.ACCESS_SECRET = self.TOKEN.ACCESS_SECRET
         self.CONSUMER_KEY = self.TOKEN.CONSUMER_KEY
         self.CONSUMER_SECRET = self.TOKEN.CONSUMER_SECRET
-        #self.API =
 
+        if self.crear_entradas():
+            self.VALIDA = True
 
-        self.crear_entradas()
-
-#Cadena a devolver cuando se convierta el objeto a STR
+# Cadena a devolver cuando se convierta el objeto a STR
     def __srt__(self):
         return self.nombre + " posición → " + self.posicion
 
-#Función para conectar con la API de Twitter (Variables en VAR.py)
+# Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
+    def existe_archivo(self, ruta_archivo):
+        return os.path.isfile(ruta_archivo)  # Comprobar que existe
+
+# Crea el array de entradas para este perfil
+    def crear_entradas(self):
+        ruta_entradas = 'Perfiles/' + self.ARCHIVO_ENTRADA
+        ruta_entradas_csv = 'Perfiles/' + self.ARCHIVO_ENTRADA_CSV
+        ruta_perfil = self.RUTA_PERFIL
+
+        print('[+] Buscando archivo → ' + ruta_entradas)
+
+        if self.existe_archivo(ruta_entradas):
+            print('[+] Utilizando el Archivo Publicar.ods')
+            convert_ODS.toCSV(ruta_entradas, ruta_perfil)
+        else:
+            print('[~] No encontrado ningún archivo Publicar.ods')
+
+        # Se comprueba que el CSV se ha creado antes de intentar crear objetos
+        if self.existe_archivo(ruta_entradas_csv):
+            self.ENTRADAS = Publicacion(ruta_entradas_csv)
+            print('\n[+] Cantidad de entradas → ' +
+                  str(self.ENTRADAS.TOTAL_LINEAS)
+            )
+            return True
+        else:
+            print('[-] No se encuentra el archivo CSV para este perfil')
+            return False
+
+
+# Función para conectar con la API de Twitter
     def conectar(self):
         print('\n[+]Conectando con la API de Twitter')
         print('[+]Espera un momento mientras se establece la conexión')
 
-        tmp = 0
-        while tmp <= 10:
-            try:
-                print('[!]Conectando con la API')
-                autenticar = tweepy.OAuthHandler(
-                    self.CONSUMER_KEY,
-                    self.CONSUMER_SECRET)
-                autenticar.set_access_token(
-                    self.ACCESS_KEY,
-                    self.ACCESS_SECRET)
-                self.API = tweepy.API(autenticar)
-                break
-            except:
-                tmp = tmp + 1
-                print('[-]No se ha conectado a la API, reintento → ', tmp)
-                if tmp < 10:
-                    print('[~]Se reintentará en 7 segundos')
-                    sleep(7)
-                elif tmp == 10:
-                    print('[-]Se han realizado 10 intentos de conectar')
-        print('[!] Se reintentará más tarde')
+        try:
+            print('[!]Conectando con la API')
+            autenticar = tweepy.OAuthHandler(
+                self.CONSUMER_KEY,
+                self.CONSUMER_SECRET)
+            autenticar.set_access_token(
+                self.ACCESS_KEY,
+                self.ACCESS_SECRET)
+            self.API = tweepy.API(autenticar)
+        except:
+            print('[-]No se ha conectado a la API de twitter')
 
-#Función para Publicar en Twitter (Recibe una cadena de 1 sola línea a publicar)
+# Función para Publicar en Twitter
     def publicar(self):
-        self.total_publicado += 1
         print("[+] Twitteando la siguiente entrada...")
         try:
             linea_actual = self.ENTRADAS.LINEA_ACTUAL
-            publicacion = self.ENTRADAS.ARRAY_ENTRADAS[linea_actual]
+            fila_actual = self.ENTRADAS.ARRAY_ENTRADAS[linea_actual]
+            publicacion = fila_actual[0] + '\n' + \
+                          fila_actual[1] + '\n' + \
+                          fila_actual[2]
+
             self.API.update_status(status=publicacion)
+
             print("[+] Tweet: " + publicacion)
+            self.total_publicado += 1
             print("[+] Se han publicado en total: " + str(self.total_publicado))
             return True
         except:
             print("[-] No se ha logrado publicar")
             return False
 
-#Función para Leer en el timeline las 50 publicaciones últimas
-#Al leer timeline también trae información como retweets y like..
+# Función para Leer en el timeline las 50 publicaciones últimas
+# Al leer timeline también trae información como retweets y like..
     def leer_timeline(self):
         public_tweets = self.API.home_timeline(50)
         for tweet in public_tweets:
             print("[+] %s" % tweet.text)
 
-#Seguir a quien me sigue y cumple unos patrones
-#(Solo compruebo los 10 últimos seguidores)
+# Seguir a quien me sigue y cumple unos patrones
+# (Solo compruebo los 10 últimos seguidores)
     def seguir(self):
         for follower in tweepy.Cursor(self.API.followers).items(10):
             follower.follow()
             print ("Se ha declarado seguir a → " + follower.screen_name)
 
-#Función para retwittear últimos mensajes según patrón coincidente
+# Función para retwittear últimos mensajes según patrón coincidente
     def retwittear(self):
         print('Se retwitteará lo siguiente → ')
 
-#Guardar información de un usuario específico que se pasa a la función
+# Guardar información de un usuario específico que se pasa a la función
     def recopilar_info(self, usuarios):
-        #TOFIX → usuarios es un array con la cantidad de usuarios a vigilar
+        #FIXME → usuarios es un array con la cantidad de usuarios a vigilar
         for usuario in usuarios:
             user = self.API.get_user(usuario)
             #TOFIX → Estos datos se guardarán en CVS o BD
@@ -128,46 +150,3 @@ class Perfil:
             print(" <<<<< LISTA DE AMIGOS >>>>>")
             for friend in user.friends():
                 print(friend.screen_name)
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Función a la que se pasa un nombre o ruta hacia archivo y devuelve booleano
-    def existe_archivo(self, ruta_archivo):
-        return os.path.isfile(ruta_archivo)  #Comprobar que existe
-
-#Crea el array de entradas para este perfil
-#En el futuro se tomará solo la posición para extraerlo de BD
-    def crear_entradas(self):
-        ruta_entradas = 'Perfiles/' + self.ARCHIVO_ENTRADA
-        ruta_entradas_csv = 'Perfiles/' + self.ARCHIVO_ENTRADA_CSV
-        ruta_perfil = self.RUTA_PERFIL
-
-        print('[+] Buscando archivo → ' + ruta_entradas)
-
-        #TODO → Eliminar entrada y perfil del array principal si no hay CSV
-
-        if self.existe_archivo(ruta_entradas):
-            print('[+] Utilizando el Archivo Publicar.ods')
-            convert_ODS.toCSV(ruta_entradas, ruta_perfil)
-        else:
-            print('[~] No encontrado ningún archivo Publicar.ods')
-
-        #Se comprueba que el CSV se ha creado antes de intentar crear objetos
-        if self.existe_archivo(ruta_entradas_csv):
-            self.ENTRADAS = Publicacion(ruta_entradas_csv)
-            #return True
-        else:
-            print('[-] No se encuentra el archivo CSV para este perfil')
-            #return False
-
-        print('\n[+] Cantidad de entradas → ' + str(self.ENTRADAS.TOTAL_LINEAS))
