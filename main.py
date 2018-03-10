@@ -30,39 +30,16 @@ def crear_perfiles():
     global PERFILES, CANTIDAD_PERFILES
     listar_perfiles = os.listdir("Perfiles")
     contador_id = 0
-    ACCESS_KEY = ''
-    ACCESS_SECRET = ''
-    CONSUMER_KEY = ''
-    CONSUMER_SECRET = ''
 
     #Crear un objeto Perfil con los datos de cada subdirectorio "Perfil"
-    for perf in listar_perfiles:
-        if ((perf != 'Plantilla') and (perf != 'plantilla') and
-            (perf != 'Plantillas') and (perf != 'plantillas') and
-            (perf != '.gitignore')):
-
-            #Leer en "Perfiles/" + perfil + "/token.csv" los valores de API
-            tmp_token = open('./Perfiles/' + perf + '/token.csv', 'r')
-            for line in tmp_token:
-                line_clean = line.replace(' ', '').strip().split('=')
-                if (line_clean[0].upper() == 'ACCESS_KEY'):
-                    print('ACCESS_KEY → ' + line_clean[1])
-                    ACCESS_KEY = line_clean[1]
-                elif (line_clean[0].upper() == 'ACCESS_SECRET'):
-                    print('ACCESS_SECRET → ' + line_clean[1])
-                    ACCESS_SECRET = line_clean[1]
-                elif (line_clean[0].upper() == 'CONSUMER_KEY'):
-                    print('CONSUMER_KEY → ' + line_clean[1])
-                    CONSUMER_KEY = line_clean[1]
-                elif (line_clean[0].upper() == 'CONSUMER_SECRET'):
-                    print('CONSUMER_SECRET → ' + line_clean[1])
-                    CONSUMER_SECRET = line_clean[1]
+    for perfil in listar_perfiles:
+        if ((perfil != 'Plantilla') and (perfil != 'plantilla') and
+            (perfil != 'Plantillas') and (perfil != 'plantillas') and
+            (perfil != '.gitignore')):
 
             #Creando objeto "perfil(id,nombre,AK,AS,CK,CS"
-            print('Creando perfil: ' + perf + ' id-' + str(contador_id))
-            PERFILES.append(Perfil(contador_id, perf,
-                                   ACCESS_KEY, ACCESS_SECRET, CONSUMER_KEY,
-                                   CONSUMER_SECRET))
+            print('Creando perfil: ' + perfil + ' id-' + str(contador_id))
+            PERFILES.append(Perfil(contador_id, perfil))
             contador_id += 1
 
     #Recuenta la cantidad total de perfiles

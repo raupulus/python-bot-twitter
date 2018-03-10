@@ -18,6 +18,7 @@ from time import sleep  # Importamos la libreria time --> time.sleep
 import os  #Importar lib para interactuar con el sistema
 
 import convert_ODS  #Importa script para convertir a CSV
+from Token import Token
 from Publicacion import Publicacion
 
 ##TOFIX las siguientes funciones
@@ -33,25 +34,22 @@ class Perfil:
     API = ''
     ENTRADAS = ''  #Objeto Publicación con las entradas
 
-    CONSUMER_KEY = ''
-    CONSUMER_SECRET = ''
-    ACCESS_KEY = ''
-    ACCESS_SECRET = ''
-
-
-
-    def __init__(self, pos, nom, A_K, A_S, C_K, C_S):
+    def __init__(self, pos, nom):
         self.posicion = pos
         self.nombre = nom
-        self.ACCESS_KEY = A_K
-        self.ACCESS_SECRET = A_S
-        self.CONSUMER_KEY = C_K
-        self.CONSUMER_SECRET = C_S
+        self.RUTA_PERFIL = 'Perfiles/' + nom
 
         self.ARCHIVO_ENTRADA = nom + '/Publicar.ods'
         self.ARCHIVO_ENTRADA_CSV = nom + '/Publicar.csv'
 
-        self.RUTA_PERFIL = 'Perfiles/' + nom
+        self.TOKEN = Token(self.RUTA_PERFIL)
+        self.ACCESS_KEY = self.TOKEN.ACCESS_KEY
+        self.ACCESS_SECRET = self.TOKEN.ACCESS_SECRET
+        self.CONSUMER_KEY = self.TOKEN.CONSUMER_KEY
+        self.CONSUMER_SECRET = self.TOKEN.CONSUMER_SECRET
+        #self.API =
+
+
         self.crear_entradas()
 
 #Cadena a devolver cuando se convierta el objeto a STR
@@ -86,12 +84,12 @@ class Perfil:
 
 #Función para Publicar en Twitter (Recibe una cadena de 1 sola línea a publicar)
     def publicar(self):
-        global API
+        #self.conectar()
         print("[+] Twitteando la siguiente entrada...")
         try:
             linea_actual = self.ENTRADAS.LINEA_ACTUAL
             publicacion = self.ENTRADAS.ARRAY_ENTRADAS[linea_actual]
-            self.API.update_status(status=publicacion)
+            #self.API.update_status(status=publicacion)
             print("[+] Tweet: " + publicacion)
             return True
         except:
