@@ -23,7 +23,7 @@ def existe_archivo(ruta_archivo):
 
 # Función para crear un archivo CSV a partir del ODS
 def toCSV(ruta_archivo, ruta_destino):
-    columna_inicio = 0  # Empieza en columna A (TITULO;TWITT;LINK)
+    columna_inicio = 0  # Empieza en columna A (TITULO;TWITT;LINK;IMAGE)
     columna_limite = 3  # Solo lee 3 columnas
 
     if existe_archivo(ruta_archivo):
@@ -64,21 +64,6 @@ def toCSV(ruta_archivo, ruta_destino):
 
         print('\n[+]Cerrando Script')
         SALIDA_CSV.close()
-
-        # Abrir archivo donde escribir
-        # SALIDA_CSV = codecs.open(ruta_destino + '/Publicar.csv',
-        #             'w', encoding='utf8')
-
-        # Pasar cada línea al archivo csv
-        # for lines in HOJAS:
-        #     for line in lines:
-        #         # Debe tener más de 20 carácteres y menos de 140
-        #         if ((len(line[0]) > 20) and (len(line[0]) <= 280)):
-        #             SALIDA_CSV.write(line[0].strip() + '\n')
-        #
-        # print('\n[+]Cerrando Script')
-        # SALIDA_CSV.close()
-
         return True
     else:
         print('No existe el archivo pasado')

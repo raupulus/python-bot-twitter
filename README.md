@@ -9,7 +9,7 @@ Mediante una función se programarán publicaciones cada cierto tiempo, ajustand
 
 ---
 
-## Versión actual 0.1 (beta)
+## Versión actual 0.2 (beta) (README pendiente de ligeras correcciones)
 Actualmente está en desarrollo por lo que no se recomienda aún el uso.
 
 Se continúa trabajando sobre el bot, ya es posible twittear pero se ha de solventar manualmente ciertas cuestiones que serán corregidas en breve.

@@ -13,15 +13,15 @@
 ##    Importar Librerías    ##
 ##############################
 from time import sleep  # Importamos la libreria time --> time.sleep
-#import sys  #Importar comandos del sistema, por ejemplo exit
-import os  #Importar lib para interactuar con el sistema
-#import random  #Genera números aleatorios --> random.randrange(1,100)
+#import sys  # Importar comandos del sistema, por ejemplo exit
+import os  # Importar lib para interactuar con el sistema
+#import random  # Genera números aleatorios --> random.randrange(1,100)
 from Perfil import Perfil
 
 ##############################
 ##         Variables        ##
 ##############################
-PERFILES = []  #Todos los perfiles instanciados
+PERFILES = []  # Todos los perfiles instanciados
 CANTIDAD_PERFILES = 0
 
 # Lista con cada objeto perfil (clase perfil)
@@ -30,23 +30,21 @@ def crear_perfiles():
     listar_perfiles = os.listdir("Perfiles")
     contador_id = 0
 
-    #Crear un objeto Perfil con los datos de cada subdirectorio "Perfil"
+    # Crear un objeto Perfil con los datos de cada subdirectorio "Perfil"
     for perfil in listar_perfiles:
-        if ((perfil != 'Plantilla') and (perfil != 'plantilla') and
-            (perfil != 'Plantillas') and (perfil != 'plantillas') and
-            (perfil != '.gitignore')):
+        if (perfil != 'Plantilla') and (perfil != '.gitignore'):
 
             #Creando objeto "perfil(id,nombre,AK,AS,CK,CS"
             print('Creando perfil: ' + perfil + ' id-' + str(contador_id))
             PERFILES.append(Perfil(contador_id, perfil))
             contador_id += 1
 
-    #Recuenta la cantidad total de perfiles
+    # Recuenta la cantidad total de perfiles
     CANTIDAD_PERFILES = len(PERFILES)
     print('\n[+] Cantidad de perfiles → ' + str(CANTIDAD_PERFILES))
 
 
-#Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
+# Convertir a CSV el archivo ODS. Por defecto busca "Publicar.ods"
 def inicializar():
     crear_perfiles()
 inicializar()
@@ -62,7 +60,7 @@ def publicar(tiempo):
             sleep(tiempo)
 
 
-#Retwittear
+# Retwittear
 def retwittear():
     print('[+] Preparando para retwittear')
     while True:
@@ -80,18 +78,7 @@ def panel_control():
 #panel_control()
 
 
-# Depuración del programa
-def depurador():
-    print('Se ha ejecutado el modo depurador (No Implementado)')
-
-
-#Función de pruebas 1 → Muestra cada publicación sin publicarla
-def test0():
-    publicar(5)
-#test0()
-
-
-#Función para solo publicar cada 1h mientras se prueba funcionamiento
+# Función para solo publicar cada 1h mientras se prueba funcionamiento
 def test1():
     while True:
         print('\n[+] Entrada Publicada:\n' + PERFILES[0].publicar())
@@ -99,29 +86,10 @@ def test1():
 #test1
 
 
-#Función para publicar cada 6 horas
-def test2():
-    while True:
-        print('\n[+] Entrada Publicada:\n' + PERFILES[0].publicar())
-        sleep(21600)  # 6 Horas entre publicaciones
-#test2()
-
-
-#Obtiene el timeline agregándolo a un archivo
-def test3():
-    print('Conectando API')
-    print('Obteniendo timeline')
-    print('Pasándolo al archivo XXXX')
-#test3()
-
-
-#Muestra los últimos 50 elementos del timeline y publica solo 1 entrada
+# Muestra los últimos 50 elementos del timeline y publica solo 1 entrada
 def test4():
     print('Estoy realizando una prueba')
     PERFILES[0].conectar()
     PERFILES[0].publicar()
     #PERFILES[0].leer_timeline()
-
 test4()
-
-#Preparando para cerrar script → print('\n[+]Cerrando Script')

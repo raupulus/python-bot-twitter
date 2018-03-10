@@ -14,13 +14,11 @@
 ##############################
 import os  # Importar lib para interactuar con el sistema
 import sys  # Importar comandos del sistema, por ejemplo exit
-import csv
-
+import csv  # Importar comandos para trabajar con formato csv
 
 class Publicacion:
     LINEA_ACTUAL = 0
     TOTAL_LINEAS = 0
-    #documento_abierto = ''
     ARRAY_ENTRADAS = []  # Contiene las entradas divididas en líneas
 
     def __init__(self, archivo_publicaciones):
@@ -39,19 +37,15 @@ class Publicacion:
         print('\n[+]Comprobando que existe el archivo Publicar.csv')
         if self.existe_archivo(archivo_publicaciones):
             print('[+]El archivo Publicar.csv existe')
+            return True
         else:
             print('[-]El archivo Publicar.csv NO EXISTE, revísalo')
-            sys.exit(0)  # Salir del script
-            #return false
+            return False
 
     # Abrir CSV en solo lectura para poder publicar
     def leerCSV(self, archivo_publicaciones):
         print('\n[+]Abriendo el archivo Publicar.csv')
         try:
-            #self.documento_abierto = open(archivo_publicaciones, 'r')
-            #self.ARRAY_ENTRADAS = self.documento_abierto.read().splitlines()
-
-            #
             with open(archivo_publicaciones) as documento_abierto:
                 archivo = csv.reader(documento_abierto, delimiter=';')
                 print(archivo_publicaciones)

@@ -59,7 +59,6 @@ class Perfil:
         return os.path.isfile(ruta_archivo)  # Comprobar que existe
 
 # Crea el array de entradas para este perfil
-# En el futuro se tomará solo la posición para extraerlo de BD
     def crear_entradas(self):
         ruta_entradas = 'Perfiles/' + self.ARCHIVO_ENTRADA
         ruta_entradas_csv = 'Perfiles/' + self.ARCHIVO_ENTRADA_CSV
