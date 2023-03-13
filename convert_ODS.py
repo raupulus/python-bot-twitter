@@ -4,9 +4,9 @@
 #######################################
 # ###     Raúl Caro Pastorino     ### #
 ## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
+### # https://github.com/raupulus/ # ###
 ## ##                             ## ##
-# ###       www.fryntiz.es        ### #
+# ###       raupulus.dev        ### #
 #######################################
 
 # Esto es una librería de funciones que ayuda a cambiar entre formatos archivos

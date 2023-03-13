@@ -4,7 +4,7 @@ Bot para publicar, marcar twitts favoritos y retwittear según patrones
 coincidentes
 
 Este repositorio se encuentra alojado en:
-https://gitlab.com/fryntiz/bot-twitter-python
+https://gitlab.com/raupulus/bot-twitter-python
 
 El principal objetivo de este bot es analizar antes de actuar y no actuar
 siempre de manera previsible.
@@ -114,7 +114,7 @@ pip3 install pyexcel-{xlsxw,ods,ods3,odsr,xlsx,xls} codecs twitter tweepy readli
 
 Nombre  |  GitLab   |  GitHub  |   Web
 :-------|:----------|:---------|:---------
-Raúl Caro Pastorino | [@fryntiz](https://gitlab.com/fryntiz) | [@fryntiz](https://github.com/fryntiz) | [https://fryntiz.es](https://fryntiz.es)
+Raúl Caro Pastorino | [@raupulus](https://gitlab.com/raupulus) | [@raupulus](https://github.com/raupulus) | [https://raupulus.dev](https://raupulus.dev)
 
 Cuando contribuyas al repositorio, ¡recuerda añadir tus datos como autor!
 
@@ -123,4 +123,4 @@ Cuando contribuyas al repositorio, ¡recuerda añadir tus datos como autor!
 
 Este repositorio incluye material libre con el que puedes hacer lo que prefieras correspondiendo con la licencia GPLv3 y respetando autoría/s
 
-Puedes consultar la licencia en el archivo adjunto [LICENSE](https://gitlab.com/fryntiz/bot-twitter-python/blob/master/LICENSE)
+Puedes consultar la licencia en el archivo adjunto [LICENSE](https://gitlab.com/raupulus/bot-twitter-python/blob/master/LICENSE)
